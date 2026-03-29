@@ -32,7 +32,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);font-fami
 .load-text{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,239,230,0.35)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── LANDING (mode chooser) ── */
+/* ── LANDING ── */
 #landing{
   position:fixed;inset:0;z-index:900;
   background:var(--ink);
@@ -64,18 +64,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);font-fami
 /* ── AR VIEWPORT ── */
 #ar-view{position:fixed;inset:0;z-index:10;display:none}
 #ar-view.active{display:block}
-#ar-canvas{position:absolute;inset:0;width:100%;height:100%}
 video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 
-/* ── HUD (always on top of AR) ── */
-#hud{
-  position:fixed;inset:0;z-index:500;
-  pointer-events:none;
-  display:none;
-}
+/* ── HUD ── */
+#hud{position:fixed;inset:0;z-index:500;pointer-events:none;display:none}
 #hud.active{display:block}
-
-/* Top bar */
 .hud-top{
   position:absolute;top:0;left:0;right:0;
   padding:16px 20px;
@@ -92,36 +85,21 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
   border-radius:99px;padding:6px 14px;cursor:pointer;
   pointer-events:auto;-webkit-tap-highlight-color:transparent;
 }
-
-/* Scan hint */
-.scan-hint{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  text-align:center;pointer-events:none;
-}
+.scan-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
 .scan-ring{
-  width:160px;height:160px;
-  border:1px solid rgba(201,169,110,0.4);
-  border-radius:50%;
-  margin:0 auto 16px;
-  position:relative;
-  animation:breathe 2.5s ease-in-out infinite;
+  width:160px;height:160px;border:1px solid rgba(201,169,110,0.4);border-radius:50%;
+  margin:0 auto 16px;position:relative;animation:breathe 2.5s ease-in-out infinite;
 }
-.scan-ring::before,.scan-ring::after{
-  content:'';position:absolute;
-  width:16px;height:16px;
-  border-color:var(--gold);border-style:solid;
-}
+.scan-ring::before,.scan-ring::after{content:'';position:absolute;width:16px;height:16px;border-color:var(--gold);border-style:solid}
 .scan-ring::before{top:-1px;left:-1px;border-width:2px 0 0 2px;border-radius:4px 0 0 0}
 .scan-ring::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;border-radius:0 0 4px 0}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.05);opacity:1}}
 .scan-text{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,169,110,0.7)}
 #scan-hint-wrap{transition:opacity 0.5s}
 #scan-hint-wrap.hide{opacity:0}
-
-/* Bottom panel */
 .hud-bottom{
   position:absolute;bottom:0;left:0;right:0;
-  background:linear-gradient(to top,rgba(13,10,7,0.9) 0%,rgba(13,10,7,0.4) 80%,transparent 100%);
+  background:linear-gradient(to top,rgba(13,10,7,0.92) 0%,rgba(13,10,7,0.4) 80%,transparent 100%);
   padding:24px 20px 36px;
   transform:translateY(100%);
   transition:transform 0.5s cubic-bezier(.4,0,.2,1);
@@ -132,138 +110,68 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
 .product-name{font-family:var(--f-display);font-size:26px;font-weight:300;color:var(--sand);margin-bottom:4px}
 .product-sub{font-size:11px;color:var(--sand2);font-weight:300;margin-bottom:16px}
 .note-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.note-pill{
-  font-size:10px;padding:4px 12px;border-radius:99px;letter-spacing:0.05em;
-  border:0.5px solid rgba(201,169,110,0.25);color:var(--gold-l);
-  background:rgba(201,169,110,0.08);
-}
+.note-pill{font-size:10px;padding:4px 12px;border-radius:99px;letter-spacing:0.05em;border:0.5px solid rgba(201,169,110,0.25);color:var(--gold-l);background:rgba(201,169,110,0.08)}
 .action-row{display:flex;gap:10px}
-.ar-btn{
-  flex:1;padding:12px;border-radius:10px;font-size:11px;font-family:var(--f-body);
-  letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;
-  -webkit-tap-highlight-color:transparent;transition:all 0.2s;
-}
+.ar-btn{flex:1;padding:12px;border-radius:10px;font-size:11px;font-family:var(--f-body);letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all 0.2s}
 .ar-btn-primary{background:rgba(201,169,110,0.15);border:0.5px solid var(--gold);color:var(--gold)}
 .ar-btn-primary:hover{background:rgba(201,169,110,0.25)}
 .ar-btn-secondary{background:transparent;border:0.5px solid rgba(245,239,230,0.15);color:rgba(245,239,230,0.45)}
 .ar-btn-secondary:hover{border-color:rgba(245,239,230,0.3);color:rgba(245,239,230,0.7)}
-
-/* Mode tabs */
-.mode-tabs{
-  display:flex;gap:6px;margin-bottom:16px;
-  overflow-x:auto;-webkit-overflow-scrolling:touch;
-  scrollbar-width:none;padding-bottom:2px;
-}
+.mode-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
 .mode-tabs::-webkit-scrollbar{display:none}
-.mode-tab{
-  flex-shrink:0;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
-  padding:6px 14px;border-radius:99px;cursor:pointer;
-  border:0.5px solid rgba(201,169,110,0.2);color:rgba(245,239,230,0.4);
-  background:transparent;font-family:var(--f-body);
-  transition:all 0.2s;-webkit-tap-highlight-color:transparent;
-}
+.mode-tab{flex-shrink:0;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border-radius:99px;cursor:pointer;border:0.5px solid rgba(201,169,110,0.2);color:rgba(245,239,230,0.4);background:transparent;font-family:var(--f-body);transition:all 0.2s;-webkit-tap-highlight-color:transparent}
 .mode-tab.active{background:rgba(201,169,110,0.15);border-color:var(--gold);color:var(--gold)}
 
-/* ── SIMULATION CANVAS (the wow visual) ── */
-#sim-canvas{
-  position:fixed;inset:0;z-index:20;
-  display:none;
-}
-#sim-canvas.active{display:block}
-
-/* ── AURA OVERLAY (CSS particle system) ── */
-#aura-overlay{
-  position:fixed;inset:0;z-index:30;
-  pointer-events:none;
-  display:none;
-  overflow:hidden;
-}
+/* ── AURA OVERLAY ── */
+#aura-overlay{position:fixed;inset:0;z-index:30;pointer-events:none;display:none;overflow:hidden}
 #aura-overlay.active{display:block}
-
-/* Floating note particles */
-.note-particle{
-  position:absolute;
-  border-radius:50%;
-  pointer-events:none;
-  animation:float-particle linear infinite;
-  opacity:0;
-}
+.note-particle{position:absolute;border-radius:50%;pointer-events:none;animation:float-particle linear infinite;opacity:0}
 @keyframes float-particle{
   0%{transform:translate(0,0) scale(0.5);opacity:0}
   10%{opacity:var(--op,0.6)}
   80%{opacity:var(--op,0.4)}
   100%{transform:translate(var(--tx,0px),var(--ty,-200px)) scale(1.5);opacity:0}
 }
+.aura-ring{position:absolute;border-radius:50%;border:1px solid;transform:translate(-50%,-50%);pointer-events:none;animation:expand-ring ease-out infinite;opacity:0}
+@keyframes expand-ring{0%{transform:translate(-50%,-50%) scale(0.3);opacity:0.8}100%{transform:translate(-50%,-50%) scale(3);opacity:0}}
 
-/* Aura ring pulses */
-.aura-ring{
-  position:absolute;
-  border-radius:50%;
-  border:1px solid;
-  transform:translate(-50%,-50%);
+/* ── BOTTLE CANVAS ── */
+#bottle-canvas{position:fixed;inset:0;z-index:25;display:none;pointer-events:none}
+#bottle-canvas.active{display:block}
+
+/* ── BOTTLE CONTROLS (gesture hint) ── */
+#bottle-controls{
+  position:fixed;bottom:160px;left:50%;transform:translateX(-50%);
+  z-index:501;display:none;
+  flex-direction:column;align-items:center;gap:6px;
   pointer-events:none;
-  animation:expand-ring ease-out infinite;
-  opacity:0;
 }
-@keyframes expand-ring{
-  0%{transform:translate(-50%,-50%) scale(0.3);opacity:0.8}
-  100%{transform:translate(-50%,-50%) scale(3);opacity:0}
+#bottle-controls.active{display:flex}
+.ctrl-hint{
+  font-size:9px;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(201,169,110,0.5);
+  background:rgba(13,10,7,0.5);
+  border:0.5px solid rgba(201,169,110,0.15);
+  border-radius:99px;padding:5px 14px;
 }
 
-/* ── INGREDIENT JOURNEY ── */
-#ingredient-view{
-  position:fixed;inset:0;z-index:800;
-  background:var(--ink);
-  display:none;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-}
+/* ── INGREDIENT VIEW ── */
+#ingredient-view{position:fixed;inset:0;z-index:800;background:var(--ink);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
 #ingredient-view.active{display:block}
-.ing-header{
-  padding:60px 24px 32px;
-  text-align:center;
-  position:relative;
-}
-.ing-back{
-  position:absolute;top:20px;left:20px;
-  font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(245,239,230,0.4);background:rgba(255,255,255,0.05);
-  border:0.5px solid rgba(255,255,255,0.1);border-radius:99px;
-  padding:7px 14px;cursor:pointer;
-}
+.ing-header{padding:60px 24px 32px;text-align:center;position:relative}
+.ing-back{position:absolute;top:20px;left:20px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,230,0.4);background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);border-radius:99px;padding:7px 14px;cursor:pointer}
 .ing-title{font-family:var(--f-display);font-size:32px;font-weight:300;color:var(--gold);margin-bottom:6px}
 .ing-sub{font-size:12px;color:var(--sand2);font-weight:300}
 .world-map-wrap{position:relative;width:100%;padding:0 16px;margin-bottom:32px}
 .world-map-svg{width:100%;height:auto;opacity:0.25;filter:brightness(0.8)}
-
-/* Map pins */
-.map-pin{
-  position:absolute;
-  cursor:pointer;
-  transform:translate(-50%,-50%);
-  animation:pin-pulse 2s ease-in-out infinite;
-  -webkit-tap-highlight-color:transparent;
-}
+.map-pin{position:absolute;cursor:pointer;transform:translate(-50%,-50%);animation:pin-pulse 2s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
 @keyframes pin-pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
 .pin-dot{width:10px;height:10px;border-radius:50%;border:2px solid;margin:0 auto 4px}
-.pin-ring{
-  position:absolute;top:50%;left:50%;
-  width:24px;height:24px;border-radius:50%;
-  transform:translate(-50%,-60%);
-  border:1px solid;
-  animation:pin-ring 2s ease-out infinite;
-  opacity:0;
-}
+.pin-ring{position:absolute;top:50%;left:50%;width:24px;height:24px;border-radius:50%;transform:translate(-50%,-60%);border:1px solid;animation:pin-ring 2s ease-out infinite;opacity:0}
 @keyframes pin-ring{0%{transform:translate(-50%,-60%) scale(0.5);opacity:0.8}100%{transform:translate(-50%,-60%) scale(2.5);opacity:0}}
 .pin-label{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;text-align:center;white-space:nowrap;margin-top:2px}
-
 .ingredient-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px 40px}
-.ing-card{
-  background:rgba(201,169,110,0.04);
-  border:0.5px solid rgba(201,169,110,0.15);
-  border-radius:14px;padding:18px 16px;
-  cursor:pointer;transition:all 0.25s;
-}
+.ing-card{background:rgba(201,169,110,0.04);border:0.5px solid rgba(201,169,110,0.15);border-radius:14px;padding:18px 16px;cursor:pointer;transition:all 0.25s}
 .ing-card:hover{background:rgba(201,169,110,0.09);border-color:rgba(201,169,110,0.35);transform:translateY(-2px)}
 .ing-icon{font-size:24px;margin-bottom:10px}
 .ing-name{font-family:var(--f-display);font-size:16px;font-weight:400;color:var(--gold);margin-bottom:2px}
@@ -272,88 +180,44 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
 .ing-note-type{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:99px;display:inline-block;margin-top:8px}
 
 /* ── STORY VIEW ── */
-#story-view{
-  position:fixed;inset:0;z-index:850;
-  background:var(--ink);
-  display:none;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-}
+#story-view{position:fixed;inset:0;z-index:850;background:var(--ink);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
 #story-view.active{display:block}
-.story-hero{
-  position:relative;min-height:55vh;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:40px 24px 32px;
-  overflow:hidden;
-}
-.story-bg{
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse at 30% 40%,rgba(107,62,38,0.4),transparent 60%),
-             radial-gradient(ellipse at 70% 80%,rgba(201,169,110,0.15),transparent 50%);
-}
-.story-year{
-  font-family:var(--f-display);
-  font-size:120px;font-weight:300;
-  color:rgba(201,169,110,0.08);
-  position:absolute;top:20px;right:-10px;
-  line-height:1;letter-spacing:-4px;
-  pointer-events:none;
-}
-.story-back{
-  position:absolute;top:20px;left:20px;
-  font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(245,239,230,0.4);background:rgba(13,10,7,0.5);
-  border:0.5px solid rgba(255,255,255,0.1);border-radius:99px;
-  padding:7px 14px;cursor:pointer;z-index:2;
-}
+.story-hero{position:relative;min-height:55vh;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 24px 32px;overflow:hidden}
+.story-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(107,62,38,0.4),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(201,169,110,0.15),transparent 50%)}
+.story-year{font-family:var(--f-display);font-size:120px;font-weight:300;color:rgba(201,169,110,0.08);position:absolute;top:20px;right:-10px;line-height:1;letter-spacing:-4px;pointer-events:none}
+.story-back{position:absolute;top:20px;left:20px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,230,0.4);background:rgba(13,10,7,0.5);border:0.5px solid rgba(255,255,255,0.1);border-radius:99px;padding:7px 14px;cursor:pointer;z-index:2}
 .story-eyebrow{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:10px;position:relative;z-index:2}
 .story-title{font-family:var(--f-display);font-size:clamp(28px,7vw,48px);font-weight:300;color:var(--sand);line-height:1.2;margin-bottom:8px;position:relative;z-index:2}
 .story-title em{font-style:italic;color:var(--gold)}
 .story-sub{font-size:12px;color:var(--sand2);font-weight:300;line-height:1.7;max-width:340px;position:relative;z-index:2}
-
 .story-chapters{padding:0 24px 48px}
-.chapter{
-  border-left:1px solid rgba(201,169,110,0.15);
-  padding:24px 0 24px 24px;
-  position:relative;
-}
-.chapter::before{
-  content:'';position:absolute;
-  left:-5px;top:28px;
-  width:9px;height:9px;border-radius:50%;
-  background:var(--ink);border:1px solid var(--gold);
-}
+.chapter{border-left:1px solid rgba(201,169,110,0.15);padding:24px 0 24px 24px;position:relative}
+.chapter::before{content:'';position:absolute;left:-5px;top:28px;width:9px;height:9px;border-radius:50%;background:var(--ink);border:1px solid var(--gold)}
 .ch-year{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:4px}
 .ch-title{font-family:var(--f-display);font-size:20px;font-weight:300;color:var(--sand);margin-bottom:8px}
 .ch-body{font-size:12px;color:rgba(245,239,230,0.45);line-height:1.8;font-weight:300}
-.ch-stat{
-  margin-top:14px;
-  background:rgba(201,169,110,0.06);
-  border:0.5px solid rgba(201,169,110,0.15);
-  border-radius:10px;padding:12px 16px;
-  font-size:11px;color:var(--gold-l);
-}
+.ch-stat{margin-top:14px;background:rgba(201,169,110,0.06);border:0.5px solid rgba(201,169,110,0.15);border-radius:10px;padding:12px 16px;font-size:11px;color:var(--gold-l)}
 .ch-stat strong{font-family:var(--f-display);font-size:22px;font-weight:300;color:var(--gold);display:block;margin-bottom:2px}
 
 /* ── TOAST ── */
-#toast{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
-  background:rgba(20,14,8,0.95);border:0.5px solid rgba(201,169,110,0.3);
-  border-radius:12px;padding:12px 20px;
-  z-index:2000;font-size:12px;color:var(--sand2);
-  text-align:center;white-space:nowrap;
-  transition:transform 0.3s cubic-bezier(.4,0,.2,1);
-  pointer-events:none;
-}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(20,14,8,0.95);border:0.5px solid rgba(201,169,110,0.3);border-radius:12px;padding:12px 20px;z-index:2000;font-size:12px;color:var(--sand2);text-align:center;white-space:nowrap;transition:transform 0.3s cubic-bezier(.4,0,.2,1);pointer-events:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
 #toast strong{color:var(--gold);font-family:var(--f-display);font-size:14px;font-weight:400;display:block;margin-bottom:2px}
 
-/* ── PARTICLES canvas overlay for 3D-like bottle ── */
-#bottle-canvas{
-  position:fixed;inset:0;z-index:25;
-  display:none;pointer-events:none;
+/* ── COLOUR SWATCH PICKER (bottle view) ── */
+#color-swatches{
+  position:fixed;right:16px;top:50%;transform:translateY(-50%);
+  z-index:502;display:none;flex-direction:column;gap:10px;
+  pointer-events:auto;
 }
-#bottle-canvas.active{display:block}
+#color-swatches.active{display:flex}
+.swatch{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid transparent;cursor:pointer;
+  transition:all 0.2s;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 2px 8px rgba(0,0,0,0.4);
+}
+.swatch.active-swatch{border-color:#fff;transform:scale(1.2)}
 </style>
 </head>
 <body>
@@ -379,7 +243,7 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
     <div class="mode-card" onclick="startAR('bottle')">
       <span class="mode-icon">🧴</span>
       <div class="mode-title">Bottle in Space</div>
-      <div class="mode-desc">Place a 3D Ajmal bottle anywhere in your room</div>
+      <div class="mode-desc">Place a premium 3D Ajmal bottle in your room</div>
     </div>
     <div class="mode-card" onclick="showIngredients()">
       <span class="mode-icon">🌍</span>
@@ -395,10 +259,9 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
   <div class="land-note">Works in Chrome & Safari · No app required · Camera access needed for AR</div>
 </div>
 
-<!-- AR VIEW (camera + HUD) -->
+<!-- AR VIEW -->
 <div id="ar-view">
   <video id="ar-video" autoplay playsinline muted></video>
-  <canvas id="ar-canvas"></canvas>
 </div>
 
 <!-- PARTICLE AURA OVERLAY -->
@@ -407,18 +270,30 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
 <!-- BOTTLE 3D CANVAS -->
 <canvas id="bottle-canvas"></canvas>
 
+<!-- COLOUR SWATCHES (bottle mode) -->
+<div id="color-swatches">
+  <div class="swatch active-swatch" style="background:linear-gradient(135deg,#C9A96E,#8B6914)" onclick="setBottleColor(0,this)" title="Amber Gold"></div>
+  <div class="swatch" style="background:linear-gradient(135deg,#B05478,#7A2448)" onclick="setBottleColor(1,this)" title="Rose Blush"></div>
+  <div class="swatch" style="background:linear-gradient(135deg,#5C4A8A,#2E2050)" onclick="setBottleColor(2,this)" title="Royal Violet"></div>
+  <div class="swatch" style="background:linear-gradient(135deg,#1D9E75,#0D5C43)" onclick="setBottleColor(3,this)" title="Teal Musk"></div>
+  <div class="swatch" style="background:linear-gradient(135deg,#2A2A2A,#111)" onclick="setBottleColor(4,this)" title="Obsidian"></div>
+</div>
+
+<!-- BOTTLE CONTROLS HINT -->
+<div id="bottle-controls">
+  <div class="ctrl-hint">Drag to rotate · Pinch to scale</div>
+</div>
+
 <!-- HUD -->
 <div id="hud">
   <div class="hud-top">
     <div class="hud-logo">Ajmal <em>Perfumes</em></div>
     <div class="hud-back" onclick="backToLanding()">← Back</div>
   </div>
-
   <div id="scan-hint-wrap" class="scan-hint">
     <div class="scan-ring"></div>
     <div class="scan-text" id="scan-text">Point at a flat surface</div>
   </div>
-
   <div class="hud-bottom" id="hud-bottom">
     <div class="mode-tabs" id="mode-tabs">
       <button class="mode-tab active" onclick="switchProduct(0,this)">Dahn Al Oudh</button>
@@ -442,36 +317,24 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
   </div>
 </div>
 
-<!-- INGREDIENT JOURNEY VIEW -->
+<!-- INGREDIENT VIEW -->
 <div id="ingredient-view">
   <div class="ing-header">
     <div class="ing-back" onclick="hideIngredients()">← Back</div>
     <div class="ing-title">Ingredient Journey</div>
     <div class="ing-sub">From earth to essence — trace every note to its origin</div>
   </div>
-
-  <!-- Stylised world map SVG -->
   <div class="world-map-wrap" style="position:relative">
     <svg class="world-map-svg" viewBox="0 0 900 450" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Simplified continents -->
       <ellipse cx="450" cy="225" rx="440" ry="215" fill="none" stroke="rgba(201,169,110,0.15)" stroke-width="1"/>
-      <!-- Africa -->
       <path d="M390 140 Q420 120 440 160 Q460 200 450 260 Q440 320 410 340 Q380 320 370 280 Q360 240 370 200 Q375 170 390 140Z" fill="rgba(201,169,110,0.08)" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
-      <!-- Europe -->
       <path d="M380 80 Q420 60 450 80 Q460 100 440 120 Q420 130 400 120 Q380 110 380 80Z" fill="rgba(201,169,110,0.08)" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
-      <!-- Middle East / Arabia -->
       <path d="M460 130 Q500 120 520 150 Q530 180 510 200 Q490 210 470 190 Q455 170 460 130Z" fill="rgba(201,169,110,0.1)" stroke="rgba(201,169,110,0.3)" stroke-width="0.5"/>
-      <!-- Asia / India -->
       <path d="M520 100 Q600 80 660 120 Q700 160 680 220 Q660 260 620 240 Q580 220 560 180 Q540 140 520 100Z" fill="rgba(201,169,110,0.08)" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
-      <!-- India sub -->
       <path d="M600 220 Q620 240 610 280 Q590 300 570 270 Q560 240 580 220 Q590 215 600 220Z" fill="rgba(201,169,110,0.1)" stroke="rgba(201,169,110,0.25)" stroke-width="0.5"/>
-      <!-- Americas -->
       <path d="M150 100 Q200 80 220 130 Q240 180 220 250 Q200 300 180 320 Q150 300 140 250 Q130 200 140 150 Q143 120 150 100Z" fill="rgba(201,169,110,0.05)" stroke="rgba(201,169,110,0.15)" stroke-width="0.5"/>
-      <!-- SE Asia / France -->
       <path d="M700 150 Q740 140 760 170 Q770 190 750 210 Q720 200 710 180 Q700 165 700 150Z" fill="rgba(201,169,110,0.07)" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
     </svg>
-
-    <!-- Map pins -->
     <div class="map-pin" style="left:58%;top:41%" onclick="highlightIngredient('assam')">
       <div class="pin-ring" style="border-color:#C9A96E"></div>
       <div class="pin-dot" style="background:#C9A96E;border-color:#C9A96E"></div>
@@ -498,7 +361,6 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
       <div class="pin-label" style="color:#C9714A;font-size:8px">Zanzibar</div>
     </div>
   </div>
-
   <div class="ingredient-cards">
     <div class="ing-card" onclick="showToast('Origin: Assam, India','Oud — Aquilaria Tree')">
       <div class="ing-icon">🌳</div>
@@ -511,35 +373,35 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
       <div class="ing-icon">🌹</div>
       <div class="ing-name">Taif Rose</div>
       <div class="ing-origin">Taif, Saudi Arabia · April harvest</div>
-      <div class="ing-desc">Hand-picked at dawn in a 3-week window each April. One gram of oil requires 1,000 flowers, distilled by families for centuries.</div>
+      <div class="ing-desc">Hand-picked at dawn in a 3-week window each April. One gram of oil requires 1,000 flowers.</div>
       <div class="ing-note-type" style="background:rgba(176,84,120,0.1);color:#D4537E;border:0.5px solid rgba(176,84,120,0.2)">Heart note</div>
     </div>
     <div class="ing-card" onclick="showToast('Origin: Grasse, France','Musk — White Atlas')">
       <div class="ing-icon">❄️</div>
       <div class="ing-name">White Musk</div>
       <div class="ing-origin">Grasse, France · Ethical origin</div>
-      <div class="ing-desc">The invisible signature — a clean, airy finish that binds every note and leaves a lingering trail hours after application.</div>
+      <div class="ing-desc">The invisible signature — a clean, airy finish that binds every note and leaves a lingering trail.</div>
       <div class="ing-note-type" style="background:rgba(29,158,117,0.1);color:#1D9E75;border:0.5px solid rgba(29,158,117,0.2)">Base note</div>
     </div>
-    <div class="ing-card" onclick="showToast('Origin: Iran / Spain','Saffron — Gold Spice')">
+    <div class="ing-card" onclick="showToast('Origin: Iran / Kashmir','Saffron — Gold Spice')">
       <div class="ing-icon">✨</div>
       <div class="ing-name">Saffron</div>
       <div class="ing-origin">Iran · Kashmiri highlands</div>
-      <div class="ing-desc">The world's most expensive spice by weight. In perfumery it adds a warm, slightly metallic richness that defines Arabic fragrances.</div>
+      <div class="ing-desc">World's most expensive spice by weight — adds a warm metallic richness that defines Arabic fragrances.</div>
       <div class="ing-note-type" style="background:rgba(201,169,110,0.08);color:#BA7517;border:0.5px solid rgba(201,169,110,0.2)">Top note</div>
     </div>
     <div class="ing-card" onclick="showToast('Origin: Cambodia','Cambodian Oud — Rarest')">
       <div class="ing-icon">🪵</div>
       <div class="ing-name">Cambodian Oud</div>
       <div class="ing-origin">Cambodia · Wild harvest</div>
-      <div class="ing-desc">Smoother and more honeyed than Indian oud — Cambodia's ancient forests yield a sweeter, lighter resin prized in royal perfumery.</div>
+      <div class="ing-desc">Smoother and more honeyed than Indian oud — Cambodia's ancient forests yield a sweeter, lighter resin.</div>
       <div class="ing-note-type" style="background:rgba(92,74,138,0.1);color:#C4B8E8;border:0.5px solid rgba(92,74,138,0.2)">Base note</div>
     </div>
     <div class="ing-card" onclick="showToast('Origin: Zanzibar','Clove — Spice Island')">
       <div class="ing-icon">🌿</div>
       <div class="ing-name">Zanzibar Clove</div>
       <div class="ing-origin">Zanzibar, Tanzania</div>
-      <div class="ing-desc">The original spice island — Zanzibar's clove adds a warm, woody bite that gives oriental fragrances their signature heat.</div>
+      <div class="ing-desc">The original spice island — clove adds a warm woody bite giving oriental fragrances their signature heat.</div>
       <div class="ing-note-type" style="background:rgba(201,113,74,0.1);color:#C9714A;border:0.5px solid rgba(201,113,74,0.2)">Top note</div>
     </div>
   </div>
@@ -553,38 +415,37 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
     <div class="story-back" onclick="hideStory()">← Back</div>
     <div class="story-eyebrow">Since 1951 · Dubai, UAE</div>
     <h2 class="story-title">Seventy years of<br><em>oud, heritage & soul</em></h2>
-    <p class="story-sub">From a single shop in Ajman to 300+ fragrances loved across 50 countries — this is the story of a family's obsession with perfection.</p>
+    <p class="story-sub">From a single shop in Ajman to 300+ fragrances loved across 50 countries.</p>
   </div>
-
   <div class="story-chapters">
     <div class="chapter">
       <div class="ch-year">1951</div>
       <div class="ch-title">The first shop in Ajman</div>
-      <div class="ch-body">Haji Ajmal Ali opens a modest attar shop in the UAE — hand-blending traditional Arabian fragrances for the local community. Every bottle is personal, every customer a neighbor.</div>
+      <div class="ch-body">Haji Ajmal Ali opens a modest attar shop in the UAE — hand-blending traditional Arabian fragrances for the local community.</div>
       <div class="ch-stat"><strong>1</strong> Shop, one family, one obsession</div>
     </div>
     <div class="chapter">
       <div class="ch-year">1970s</div>
       <div class="ch-title">The oud expeditions begin</div>
-      <div class="ch-body">Ajmal's founders travel personally to Assam, India — forging direct relationships with oud farmers and establishing ethical sourcing practices that still define the brand today.</div>
+      <div class="ch-body">Ajmal's founders travel personally to Assam, India — forging direct relationships with oud farmers and establishing ethical sourcing practices.</div>
       <div class="ch-stat"><strong>40+</strong> Years of direct farmer partnerships</div>
     </div>
     <div class="chapter">
       <div class="ch-year">1990s</div>
       <div class="ch-title">From regional to international</div>
-      <div class="ch-body">Ajmal expands across the GCC, India, and Pakistan. The iconic Dahn Al Oudh range launches and quickly becomes the most gifted fragrance collection in the Gulf, synonymous with celebration.</div>
+      <div class="ch-body">Ajmal expands across the GCC, India, and Pakistan. The iconic Dahn Al Oudh range launches and quickly becomes the most gifted fragrance in the Gulf.</div>
       <div class="ch-stat"><strong>12</strong> Countries entered in a single decade</div>
     </div>
     <div class="chapter">
       <div class="ch-year">2010s</div>
       <div class="ch-title">300 fragrances and growing</div>
-      <div class="ch-body">Ajmal's in-house perfumers — trained in Grasse, France and carrying ancestral knowledge — create a portfolio spanning from ancient attars to modern eau de parfums, winning international awards.</div>
+      <div class="ch-body">In-house perfumers trained in Grasse and carrying ancestral knowledge create a portfolio spanning ancient attars to modern eau de parfums.</div>
       <div class="ch-stat"><strong>300+</strong> Fragrances crafted in-house</div>
     </div>
     <div class="chapter">
       <div class="ch-year">2024 →</div>
       <div class="ch-title">The AI & AR chapter</div>
-      <div class="ch-body">Ajmal enters the next era — where every customer gets a personalised Scent DNA, where bottles come alive in augmented reality, and where 70 years of heritage meets the intelligence of tomorrow.</div>
+      <div class="ch-body">Ajmal enters the next era — personalised Scent DNA, bottles alive in augmented reality, 70 years of heritage meets the intelligence of tomorrow.</div>
       <div class="ch-stat"><strong>50+</strong> Countries, 1 family's vision</div>
     </div>
   </div>
@@ -594,32 +455,63 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
 <div id="toast"><strong id="t-title"></strong><span id="t-msg"></span></div>
 
 <script>
+/* ═══════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════ */
 var arMode = null;
 var arStream = null;
 var auraActive = false;
 var bottleActive = false;
 var particleInterval = null;
 var detectedSurface = false;
+var raf = null;
+
+/* Bottle interaction state */
+var dragActive = false;
+var lastX = 0, lastY = 0;
+var rotX = -0.15, rotY = 0.3;   /* euler angles in radians */
+var targetRotX = -0.15, targetRotY = 0.3;
+var bottleScale = 1;
+var targetScale = 1;
+var pinchDist0 = 0;
+var pinchScale0 = 1;
+
+/* Bottle colour themes */
+var bottleColorIdx = 0;
+var bottleColors = [
+  { primary:'#C9A96E', mid:'#8B6914', dark:'#5A3F08', cap:'#E8D5B0', capShine:'#FFF8E7', label:'Amber Gold',   liquid:'rgba(180,120,30,0.22)',  rim:'rgba(240,220,176,0.6)' },
+  { primary:'#C06080', mid:'#7A2448', dark:'#3E0C22', cap:'#E8B0C8', capShine:'#FFE8F0', label:'Rose Blush',   liquid:'rgba(176,84,120,0.22)', rim:'rgba(232,176,200,0.6)' },
+  { primary:'#7060AA', mid:'#3A2870', dark:'#1A0C40', cap:'#C8B8E8', capShine:'#EEE8FF', label:'Royal Violet', liquid:'rgba(92,74,138,0.22)',  rim:'rgba(200,184,232,0.6)' },
+  { primary:'#259E7A', mid:'#0D5C43', dark:'#062E22', cap:'#A8E8D0', capShine:'#D8FFF0', label:'Teal Musk',    liquid:'rgba(29,158,117,0.22)', rim:'rgba(168,232,208,0.6)' },
+  { primary:'#555555', mid:'#222222', dark:'#080808', cap:'#888888', capShine:'#CCCCCC', label:'Obsidian',     liquid:'rgba(40,40,40,0.35)',   rim:'rgba(140,140,140,0.6)' }
+];
 
 var products = [
-  {name:'Dahn Al Oudh Moattaq',sub:'Deep oud · Amber · Saffron · Long-lasting',eyebrow:'Oud Collection · Top Match 97%',notes:['Oud','Amber','Saffron','Musk'],color:'#C9A96E',auraColors:['#C9A96E','#8B6914','#C9714A','#6B3E26']},
-  {name:'Aurum',sub:'Warm floral · Musk · Golden accord',eyebrow:'Floral Collection · Top Match 91%',notes:['Rose','Vanilla','Musk','Amber'],color:'#B05478',auraColors:['#B05478','#D4537E','#E8D5B0','#6B3E26']},
-  {name:'Mukhallat Malaki',sub:'Royal oud · Saffron · Ceremonial grandeur',eyebrow:'Royal Collection · Top Match 96%',notes:['Oud','Saffron','Rose','Labdanum'],color:'#5C4A8A',auraColors:['#5C4A8A','#C9A96E','#B05478','#6B3E26']},
-  {name:'Wisal',sub:'Soft musk · Vanilla · Gentle warmth',eyebrow:'Musk Collection · Top Match 93%',notes:['Musk','Vanilla','Jasmine','Sandalwood'],color:'#1D9E75',auraColors:['#1D9E75','#E8D5B0','#B05478','#888780']}
+  {name:'Dahn Al Oudh Moattaq',sub:'Deep oud · Amber · Saffron · Long-lasting',eyebrow:'Oud Collection · Top Match 97%',notes:['Oud','Amber','Saffron','Musk'],auraColors:['#C9A96E','#8B6914','#C9714A','#6B3E26']},
+  {name:'Aurum',sub:'Warm floral · Musk · Golden accord',eyebrow:'Floral Collection · Top Match 91%',notes:['Rose','Vanilla','Musk','Amber'],auraColors:['#B05478','#D4537E','#E8D5B0','#6B3E26']},
+  {name:'Mukhallat Malaki',sub:'Royal oud · Saffron · Ceremonial grandeur',eyebrow:'Royal Collection · Top Match 96%',notes:['Oud','Saffron','Rose','Labdanum'],auraColors:['#5C4A8A','#C9A96E','#B05478','#6B3E26']},
+  {name:'Wisal',sub:'Soft musk · Vanilla · Gentle warmth',eyebrow:'Musk Collection · Top Match 93%',notes:['Musk','Vanilla','Jasmine','Sandalwood'],auraColors:['#1D9E75','#E8D5B0','#B05478','#888780']}
 ];
 var curProduct = 0;
 
-/* ─ INIT ─ */
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
 window.addEventListener('load', function(){
   setTimeout(function(){
     document.getElementById('loading').classList.add('hide');
   }, 1800);
 });
 
-/* ─ AR LAUNCH ─ */
+/* ═══════════════════════════════════════════
+   AR LAUNCH
+═══════════════════════════════════════════ */
 function startAR(mode){
   arMode = mode;
   detectedSurface = false;
+  rotX = -0.15; rotY = 0.3;
+  targetRotX = -0.15; targetRotY = 0.3;
+  bottleScale = 1; targetScale = 1;
   document.getElementById('landing').classList.add('hide');
   document.getElementById('ar-view').classList.add('active');
   document.getElementById('hud').classList.add('active');
@@ -635,10 +527,7 @@ function startAR(mode){
       vid.play();
       simulateSurfaceDetection();
     })
-    .catch(function(){
-      /* Camera denied — run simulation mode */
-      runSimulationMode(mode);
-    });
+    .catch(function(){ runSimulationMode(mode); });
 }
 
 function simulateSurfaceDetection(){
@@ -647,13 +536,14 @@ function simulateSurfaceDetection(){
     document.getElementById('scan-text').textContent = 'Surface detected ✓';
     document.getElementById('scan-hint-wrap').classList.add('hide');
     document.getElementById('hud-bottom').classList.add('show');
-
     if(arMode === 'aura') launchAura();
     else launchBottle();
   }, 2200);
 }
 
-/* ─ AURA PARTICLES ─ */
+/* ═══════════════════════════════════════════
+   AURA PARTICLES
+═══════════════════════════════════════════ */
 function launchAura(){
   auraActive = true;
   var overlay = document.getElementById('aura-overlay');
@@ -683,9 +573,7 @@ function spawnAuraRings(overlay, p){
 
 function spawnParticles(overlay, p){
   var noteNames = ['oud','rose','amber','musk','saffron','sandalwood','bergamot','cedar'];
-  var cx = window.innerWidth/2;
-  var cy = window.innerHeight * 0.6;
-
+  var cx = window.innerWidth/2, cy = window.innerHeight * 0.6;
   function spawn(){
     if(!auraActive) return;
     var particle = document.createElement('div');
@@ -700,160 +588,512 @@ function spawnParticles(overlay, p){
     var col = p.auraColors[Math.floor(Math.random()*p.auraColors.length)];
     var dur = 2.5 + Math.random()*2.5;
     var op = 0.3 + Math.random()*0.5;
-
     particle.style.cssText = 'left:'+startX+'px;top:'+startY+'px;width:'+size+'px;height:'+size+'px;background:'+col+';--tx:'+tx+'px;--ty:'+ty+'px;--op:'+op+';animation-duration:'+dur+'s;animation-delay:0s';
-
-    /* Occasionally show note label */
     if(Math.random() > 0.65){
-      particle.style.background = 'transparent';
-      particle.style.borderRadius = '0';
-      particle.style.fontSize = '9px';
-      particle.style.letterSpacing = '0.1em';
-      particle.style.textTransform = 'uppercase';
-      particle.style.color = col;
-      particle.style.fontFamily = "'DM Sans',sans-serif";
-      particle.style.whiteSpace = 'nowrap';
-      particle.textContent = noteNames[Math.floor(Math.random()*noteNames.length)];
-      particle.style.width = 'auto';
-      particle.style.height = 'auto';
+      particle.style.background='transparent';particle.style.borderRadius='0';
+      particle.style.fontSize='9px';particle.style.letterSpacing='0.1em';
+      particle.style.textTransform='uppercase';particle.style.color=col;
+      particle.style.fontFamily="'DM Sans',sans-serif";particle.style.whiteSpace='nowrap';
+      particle.textContent=noteNames[Math.floor(Math.random()*noteNames.length)];
+      particle.style.width='auto';particle.style.height='auto';
     }
-
     overlay.appendChild(particle);
     setTimeout(function(){ if(particle.parentNode) particle.parentNode.removeChild(particle); }, dur*1000+200);
   }
-
   particleInterval = setInterval(spawn, 120);
 }
 
-/* ─ BOTTLE AR (canvas simulation) ─ */
+/* ═══════════════════════════════════════════
+   PREMIUM BOTTLE 3D
+═══════════════════════════════════════════ */
 function launchBottle(){
   bottleActive = true;
   var canvas = document.getElementById('bottle-canvas');
   canvas.classList.add('active');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  drawBottle(canvas);
+  canvas.width = window.innerWidth * window.devicePixelRatio;
+  canvas.height = window.innerHeight * window.devicePixelRatio;
+  canvas.style.width = window.innerWidth + 'px';
+  canvas.style.height = window.innerHeight + 'px';
+
+  document.getElementById('color-swatches').classList.add('active');
+  document.getElementById('bottle-controls').classList.add('active');
+
+  attachBottleGestures(canvas);
+  startBottleLoop(canvas);
+  showToast('Drag to rotate · Pinch to scale', products[curProduct].name);
 }
 
-function drawBottle(canvas){
+function attachBottleGestures(canvas){
+  /* Touch drag */
+  canvas.style.pointerEvents = 'auto';
+  canvas.addEventListener('touchstart', function(e){
+    if(e.touches.length === 1){
+      dragActive = true;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+    } else if(e.touches.length === 2){
+      dragActive = false;
+      pinchDist0 = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      pinchScale0 = targetScale;
+    }
+    e.preventDefault();
+  }, {passive:false});
+
+  canvas.addEventListener('touchmove', function(e){
+    if(e.touches.length === 1 && dragActive){
+      var dx = e.touches[0].clientX - lastX;
+      var dy = e.touches[0].clientY - lastY;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+      targetRotY += dx * 0.012;
+      targetRotX += dy * 0.008;
+      targetRotX = Math.max(-0.9, Math.min(0.9, targetRotX));
+    } else if(e.touches.length === 2){
+      var d = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      targetScale = Math.max(0.5, Math.min(2.0, pinchScale0 * (d / pinchDist0)));
+    }
+    e.preventDefault();
+  }, {passive:false});
+
+  canvas.addEventListener('touchend', function(){ dragActive = false; });
+
+  /* Mouse drag (desktop preview) */
+  canvas.addEventListener('mousedown', function(e){
+    dragActive = true; lastX = e.clientX; lastY = e.clientY;
+  });
+  window.addEventListener('mousemove', function(e){
+    if(!dragActive) return;
+    var dx = e.clientX - lastX; var dy = e.clientY - lastY;
+    lastX = e.clientX; lastY = e.clientY;
+    targetRotY += dx * 0.01; targetRotX += dy * 0.006;
+    targetRotX = Math.max(-0.9, Math.min(0.9, targetRotX));
+  });
+  window.addEventListener('mouseup', function(){ dragActive = false; });
+  canvas.addEventListener('wheel', function(e){
+    targetScale = Math.max(0.5, Math.min(2.0, targetScale - e.deltaY * 0.001));
+    e.preventDefault();
+  }, {passive:false});
+}
+
+function startBottleLoop(canvas){
   var ctx = canvas.getContext('2d');
-  var cx = canvas.width/2;
-  var cy = canvas.height * 0.48;
-  var p = products[curProduct];
-  var col = p.color;
+  var dpr = window.devicePixelRatio || 1;
   var t = 0;
 
   function frame(){
-    if(!bottleActive) return;
-    t += 0.018;
+    if(!bottleActive){ ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+    t += 0.016;
+
+    /* Smooth interpolation */
+    rotX += (targetRotX - rotX) * 0.1;
+    rotY += (targetRotY - rotY) * 0.1;
+    bottleScale += (targetScale - bottleScale) * 0.1;
+
+    /* Auto-spin when not dragging */
+    if(!dragActive){ targetRotY += 0.004; }
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    /* Shadow on "floor" */
-    ctx.save();
-    ctx.translate(cx, cy+130);
-    ctx.scale(1,0.25);
-    ctx.beginPath();
-    ctx.arc(0,0,55,0,Math.PI*2);
-    ctx.fillStyle = 'rgba(0,0,0,0.3)';
-    ctx.fill();
-    ctx.restore();
-
-    /* Subtle bob animation */
-    var bob = Math.sin(t)*6;
-    var rot = Math.sin(t*0.7)*0.04;
+    var cx = canvas.width / 2;
+    var cy = canvas.height * 0.46;
+    var sc = bottleScale * dpr * Math.min(canvas.width, canvas.height) / 480;
 
     ctx.save();
-    ctx.translate(cx, cy + bob);
-    ctx.rotate(rot);
+    ctx.translate(cx, cy);
+    ctx.scale(sc, sc);
 
-    /* Bottle body */
-    var grad = ctx.createLinearGradient(-50,-110,60,110);
-    grad.addColorStop(0, lighten(col, 40));
-    grad.addColorStop(0.4, col);
-    grad.addColorStop(1, darken(col, 40));
-
-    ctx.beginPath();
-    roundRect(ctx,-44,-100,88,200,18);
-    ctx.fillStyle = grad;
-    ctx.fill();
-
-    /* Glass shine */
-    var shine = ctx.createLinearGradient(-44,-100,-10,100);
-    shine.addColorStop(0,'rgba(255,255,255,0.25)');
-    shine.addColorStop(0.3,'rgba(255,255,255,0.08)');
-    shine.addColorStop(1,'rgba(255,255,255,0)');
-    ctx.beginPath();
-    roundRect(ctx,-44,-100,34,200,18);
-    ctx.fillStyle = shine;
-    ctx.fill();
-
-    /* Neck */
-    ctx.beginPath();
-    ctx.moveTo(-18,-100);
-    ctx.lineTo(-14,-128);
-    ctx.lineTo(14,-128);
-    ctx.lineTo(18,-100);
-    ctx.closePath();
-    ctx.fillStyle = lighten(col,20);
-    ctx.fill();
-
-    /* Cap */
-    ctx.beginPath();
-    roundRect(ctx,-18,-158,36,34,6);
-    ctx.fillStyle = '#C9A96E';
-    ctx.fill();
-    ctx.beginPath();
-    roundRect(ctx,-12,-158,24,10,3);
-    ctx.fillStyle = '#E8D5B0';
-    ctx.fill();
-
-    /* Label area */
-    ctx.beginPath();
-    roundRect(ctx,-32,-50,64,90,6);
-    ctx.fillStyle = 'rgba(245,239,230,0.12)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(245,239,230,0.2)';
-    ctx.lineWidth = 0.5;
-    ctx.stroke();
-
-    /* Label text */
-    ctx.fillStyle = 'rgba(245,239,230,0.9)';
-    ctx.font = '300 9px "Cormorant Garamond",serif';
-    ctx.textAlign = 'center';
-    ctx.letterSpacing = '2px';
-    ctx.fillText('AJMAL', 0, -28);
-    ctx.font = 'italic 300 7px "Cormorant Garamond",serif';
-    ctx.fillStyle = '#C9A96E';
-    var shortName = p.name.length > 14 ? p.name.split(' ').slice(0,2).join(' ') : p.name;
-    ctx.fillText(shortName, 0, -14);
-
-    /* Bottom label */
-    ctx.font = '300 6px "DM Sans",sans-serif';
-    ctx.fillStyle = 'rgba(245,239,230,0.35)';
-    ctx.fillText('EAU DE PARFUM', 0, 30);
+    drawPremiumBottle(ctx, t, rotX, rotY);
 
     ctx.restore();
-
-    /* AR floor grid lines */
-    ctx.save();
-    ctx.translate(cx, cy+130);
-    ctx.scale(1,0.3);
-    ctx.strokeStyle = 'rgba(201,169,110,0.12)';
-    ctx.lineWidth = 0.5;
-    for(var i=-5;i<=5;i++){
-      ctx.beginPath();ctx.moveTo(i*30,-180);ctx.lineTo(i*30,180);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(-180,i*30);ctx.lineTo(180,i*30);ctx.stroke();
-    }
-    ctx.restore();
-
-    requestAnimationFrame(frame);
+    raf = requestAnimationFrame(frame);
   }
-  frame();
+  raf = requestAnimationFrame(frame);
 }
 
-function roundRect(ctx,x,y,w,h,r){
-  ctx.moveTo(x+r,y);
-  ctx.lineTo(x+w-r,y);
+/* ─────────────────────────────────────────
+   PREMIUM BOTTLE RENDERER
+   Uses rotX/rotY to simulate 3D perspective
+───────────────────────────────────────── */
+function drawPremiumBottle(ctx, t, rx, ry){
+  var theme = bottleColors[bottleColorIdx];
+  var bob = Math.sin(t * 1.1) * 5;
+
+  /* Perspective factor from rotation */
+  var perspX = Math.sin(ry);   /* -1..1 left/right lean */
+  var perspY = Math.sin(rx);   /* -1..1 top/bottom lean */
+  var depth  = Math.cos(ry);   /* depth scale 0..1 */
+
+  /* ── AR FLOOR GRID ── */
+  ctx.save();
+  ctx.translate(0, 145 + bob);
+  ctx.scale(1, 0.28);
+  var gridAlpha = 0.08 + depth * 0.06;
+  ctx.strokeStyle = 'rgba(201,169,110,' + gridAlpha + ')';
+  ctx.lineWidth = 0.5;
+  for(var gi = -8; gi <= 8; gi++){
+    ctx.beginPath(); ctx.moveTo(gi*22, -200); ctx.lineTo(gi*22, 200); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-200, gi*22); ctx.lineTo(200, gi*22); ctx.stroke();
+  }
+  /* Grid glow dot in centre */
+  var gridGlow = ctx.createRadialGradient(0,0,0,0,0,80);
+  gridGlow.addColorStop(0, 'rgba(201,169,110,0.10)');
+  gridGlow.addColorStop(1, 'rgba(201,169,110,0)');
+  ctx.fillStyle = gridGlow;
+  ctx.fillRect(-200,-200,400,400);
+  ctx.restore();
+
+  /* ── GROUND SHADOW ── */
+  ctx.save();
+  ctx.translate(perspX * 14, 145 + bob);
+  ctx.scale(1, 0.22);
+  var shadowGrad = ctx.createRadialGradient(0,0,0,0,0,70);
+  shadowGrad.addColorStop(0,'rgba(0,0,0,0.55)');
+  shadowGrad.addColorStop(0.5,'rgba(0,0,0,0.2)');
+  shadowGrad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = shadowGrad;
+  ctx.beginPath(); ctx.ellipse(0,0,70,60,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+
+  ctx.save();
+  ctx.translate(perspX * 8, bob);
+
+  /* ══════════════════════════════
+     BOTTLE BODY — skewed by rotY
+  ══════════════════════════════ */
+  var w = 90;          /* half-width */
+  var h = 210;         /* height */
+  var skewX = perspX * 18;  /* horizontal skew for 3D feel */
+  var scaleX = 0.78 + depth * 0.22;  /* compress width as it rotates */
+  var bW = w * scaleX;
+
+  /* Body base gradient */
+  var bodyGrad = ctx.createLinearGradient(-bW, -h*0.5, bW, h*0.5);
+  bodyGrad.addColorStop(0,   lighten(theme.primary, 60));
+  bodyGrad.addColorStop(0.18, lighten(theme.primary, 25));
+  bodyGrad.addColorStop(0.45, theme.primary);
+  bodyGrad.addColorStop(0.72, theme.mid);
+  bodyGrad.addColorStop(1,   theme.dark);
+  
+  ctx.save();
+  ctx.transform(1, 0, skewX/h, 1, 0, 0);
+
+  /* Body shape */
+  ctx.beginPath();
+  bottleBodyPath(ctx, 0, 0, bW, h, 20);
+  ctx.fillStyle = bodyGrad;
+  ctx.fill();
+
+  /* ── GLASS REFRACTION — inner bright column ── */
+  var innerW = bW * 0.28;
+  var refrGrad = ctx.createLinearGradient(-innerW, -h*0.5, innerW, h*0.5);
+  refrGrad.addColorStop(0, 'rgba(255,255,255,0.18)');
+  refrGrad.addColorStop(0.3,'rgba(255,255,255,0.06)');
+  refrGrad.addColorStop(0.7,'rgba(255,255,255,0.02)');
+  refrGrad.addColorStop(1,  'rgba(255,255,255,0)');
+  ctx.beginPath();
+  bottleBodyPath(ctx, -bW*0.5 + innerW*0.5, 0, innerW, h*0.96, 14);
+  ctx.fillStyle = refrGrad;
+  ctx.fill();
+
+  /* ── LIQUID inside glass ── */
+  ctx.save();
+  ctx.beginPath();
+  bottleBodyPath(ctx, 0, 0, bW - 6, h - 6, 16);
+  ctx.clip();
+  var liquidTop = h * 0.15;
+  var liquidGrad = ctx.createLinearGradient(0, liquidTop - h*0.5, 0, h*0.5);
+  liquidGrad.addColorStop(0, theme.liquid);
+  liquidGrad.addColorStop(0.4, theme.liquid.replace('0.22','0.32'));
+  liquidGrad.addColorStop(1, theme.liquid.replace('0.22','0.44'));
+  ctx.fillStyle = liquidGrad;
+  ctx.fillRect(-bW, liquidTop - h*0.5, bW*2, h);
+  /* liquid meniscus */
+  ctx.beginPath();
+  ctx.ellipse(0, liquidTop - h*0.5, bW - 10, 8, 0, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,255,255,0.07)';
+  ctx.fill();
+  ctx.restore();
+
+  /* ── LEFT EDGE SHINE (primary highlight) ── */
+  var shineGrad = ctx.createLinearGradient(-bW, 0, -bW*0.4, 0);
+  shineGrad.addColorStop(0,'rgba(255,255,255,0.32)');
+  shineGrad.addColorStop(0.4,'rgba(255,255,255,0.10)');
+  shineGrad.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.beginPath();
+  bottleBodyPath(ctx, -bW*0.22, 0, bW*0.55, h*0.97, 16);
+  ctx.fillStyle = shineGrad;
+  ctx.fill();
+
+  /* ── RIGHT EDGE DARK RIM ── */
+  var rimGrad = ctx.createLinearGradient(bW*0.4, 0, bW, 0);
+  rimGrad.addColorStop(0,'rgba(0,0,0,0)');
+  rimGrad.addColorStop(0.6,'rgba(0,0,0,0.12)');
+  rimGrad.addColorStop(1,'rgba(0,0,0,0.35)');
+  ctx.beginPath();
+  bottleBodyPath(ctx, bW*0.18, 0, bW*0.82, h*0.97, 16);
+  ctx.fillStyle = rimGrad;
+  ctx.fill();
+
+  /* ── CAUSTIC DOTS (light refraction) ── */
+  var numCaustics = 6;
+  for(var ci=0; ci<numCaustics; ci++){
+    var cAngle = t*0.7 + ci*(Math.PI*2/numCaustics);
+    var cR = bW * (0.2 + 0.15*Math.sin(t*0.4 + ci));
+    var cX = -bW*0.15 + Math.cos(cAngle)*cR * 0.5;
+    var cY = -h*0.1 + Math.sin(cAngle)*h*0.25;
+    var cSize = 3 + 2*Math.sin(t + ci*1.3);
+    var causticGrad = ctx.createRadialGradient(cX,cY,0,cX,cY,cSize*2);
+    causticGrad.addColorStop(0,'rgba(255,255,220,0.22)');
+    causticGrad.addColorStop(1,'rgba(255,255,220,0)');
+    ctx.beginPath();
+    ctx.arc(cX, cY, cSize*2, 0, Math.PI*2);
+    ctx.fillStyle = causticGrad;
+    ctx.fill();
+  }
+
+  /* ── SPECULAR HIGHLIGHT (top-left glint) ── */
+  var specX = -bW*0.55 + perspX*bW*0.2;
+  var specY = -h*0.35 + perspY*20;
+  var specGrad = ctx.createRadialGradient(specX, specY, 0, specX, specY, bW*0.5);
+  specGrad.addColorStop(0,'rgba(255,255,255,0.55)');
+  specGrad.addColorStop(0.2,'rgba(255,255,255,0.15)');
+  specGrad.addColorStop(0.5,'rgba(255,255,255,0.04)');
+  specGrad.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.beginPath();
+  bottleBodyPath(ctx, 0, 0, bW, h, 20);
+  ctx.fillStyle = specGrad;
+  ctx.fill();
+
+  /* ── BOTTLE BORDER ── */
+  ctx.beginPath();
+  bottleBodyPath(ctx, 0, 0, bW, h, 20);
+  ctx.strokeStyle = theme.rim;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.restore(); /* unskew */
+
+  /* ── LABEL AREA ── */
+  ctx.save();
+  ctx.transform(1, 0, skewX/h, 1, 0, 0);
+  var labelW = bW * scaleX * 0.75;
+  var labelH = h * 0.38;
+  var labelY = -h * 0.02;
+  ctx.beginPath();
+  roundedRect(ctx, -labelW/2, labelY - labelH/2, labelW, labelH, 8);
+  ctx.fillStyle = 'rgba(255,255,255,0.06)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+
+  /* Label decorative line */
+  ctx.strokeStyle = 'rgba(201,169,110,0.3)';
+  ctx.lineWidth = 0.4;
+  ctx.beginPath(); ctx.moveTo(-labelW*0.38, labelY - labelH*0.32); ctx.lineTo(labelW*0.38, labelY - labelH*0.32); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-labelW*0.38, labelY + labelH*0.32); ctx.lineTo(labelW*0.38, labelY + labelH*0.32); ctx.stroke();
+
+  /* Label brand name */
+  ctx.fillStyle = 'rgba(245,239,230,0.9)';
+  ctx.font = '300 11px "Cormorant Garamond",serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('A  J  M  A  L', 0, labelY - 18);
+
+  ctx.fillStyle = theme.primary;
+  ctx.font = 'italic 300 8.5px "Cormorant Garamond",serif';
+  var pName = products[curProduct].name;
+  var shortName = pName.length > 14 ? pName.split(' ').slice(0,2).join(' ') : pName;
+  ctx.fillText(shortName, 0, labelY - 4);
+
+  ctx.fillStyle = 'rgba(245,239,230,0.25)';
+  ctx.font = '300 6px "DM Sans",sans-serif';
+  ctx.fillText('EAU DE PARFUM · 100ml', 0, labelY + 14);
+
+  /* Fragrance mark — small floral ornament */
+  ctx.fillStyle = 'rgba(201,169,110,0.4)';
+  ctx.font = '11px serif';
+  ctx.fillText('✦', 0, labelY + 28);
+
+  ctx.restore();
+
+  /* ══════════════════════════════
+     NECK
+  ══════════════════════════════ */
+  ctx.save();
+  ctx.transform(1, 0, skewX/h, 1, 0, 0);
+  var neckW = bW * scaleX * 0.32;
+  var neckH = 42;
+  var neckY = -h/2 - neckH/2;
+
+  var neckGrad = ctx.createLinearGradient(-neckW, neckY, neckW, neckY+neckH);
+  neckGrad.addColorStop(0, lighten(theme.primary, 50));
+  neckGrad.addColorStop(0.5, theme.primary);
+  neckGrad.addColorStop(1, theme.mid);
+  ctx.beginPath();
+  ctx.moveTo(-neckW * 0.7, neckY);
+  ctx.bezierCurveTo(-neckW*0.75, neckY+neckH*0.4, -neckW, neckY+neckH*0.7, -neckW, neckY+neckH);
+  ctx.lineTo(neckW, neckY+neckH);
+  ctx.bezierCurveTo(neckW, neckY+neckH*0.7, neckW*0.75, neckY+neckH*0.4, neckW*0.7, neckY);
+  ctx.closePath();
+  ctx.fillStyle = neckGrad;
+  ctx.fill();
+
+  /* neck shine */
+  var nShine = ctx.createLinearGradient(-neckW, 0, neckW*0.1, 0);
+  nShine.addColorStop(0,'rgba(255,255,255,0.28)');
+  nShine.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle = nShine;
+  ctx.fill();
+  ctx.strokeStyle = theme.rim;
+  ctx.lineWidth = 0.7;
+  ctx.stroke();
+
+  /* neck ring band */
+  ctx.beginPath();
+  ctx.fillStyle = 'rgba(201,169,110,0.5)';
+  roundedRect(ctx, -neckW*0.9, neckY + neckH - 7, neckW*1.8, 5, 2);
+  ctx.fill();
+
+  ctx.restore();
+
+  /* ══════════════════════════════
+     CAP / ATOMISER
+  ══════════════════════════════ */
+  ctx.save();
+  ctx.transform(1, 0, skewX/h, 1, 0, 0);
+  var capW = bW * scaleX * 0.4;
+  var capH = 52;
+  var capY = -h/2 - neckH - capH + 2;
+
+  /* Cap body */
+  var capGrad = ctx.createLinearGradient(-capW, capY, capW, capY + capH);
+  capGrad.addColorStop(0,   lighten(theme.cap.replace('#',''), 40));
+  capGrad.addColorStop(0.3, theme.cap);
+  capGrad.addColorStop(0.8, darkenHex(theme.cap, 30));
+  capGrad.addColorStop(1,   darkenHex(theme.cap, 55));
+  ctx.beginPath();
+  roundedRect(ctx, -capW, capY, capW*2, capH, 8);
+  ctx.fillStyle = capGrad;
+  ctx.fill();
+
+  /* Cap shine stripe */
+  var capShineGrad = ctx.createLinearGradient(-capW, capY, -capW*0.1, capY+capH);
+  capShineGrad.addColorStop(0, 'rgba(255,255,255,0.45)');
+  capShineGrad.addColorStop(0.5,'rgba(255,255,255,0.10)');
+  capShineGrad.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.beginPath();
+  roundedRect(ctx, -capW, capY, capW*0.7, capH, 8);
+  ctx.fillStyle = capShineGrad;
+  ctx.fill();
+
+  /* Cap horizontal engraving lines */
+  ctx.strokeStyle = 'rgba(0,0,0,0.12)';
+  ctx.lineWidth = 0.6;
+  for(var li=0; li<4; li++){
+    var ly = capY + capH*(0.25 + li*0.17);
+    ctx.beginPath(); ctx.moveTo(-capW+4, ly); ctx.lineTo(capW-4, ly); ctx.stroke();
+  }
+
+  /* Gold band at cap base */
+  ctx.beginPath();
+  roundedRect(ctx, -capW*1.05, capY+capH-8, capW*2.1, 10, 4);
+  var bandGrad = ctx.createLinearGradient(-capW,0,capW,0);
+  bandGrad.addColorStop(0,'#8B6914'); bandGrad.addColorStop(0.3,'#E8D5B0'); bandGrad.addColorStop(0.7,'#C9A96E'); bandGrad.addColorStop(1,'#8B6914');
+  ctx.fillStyle = bandGrad;
+  ctx.fill();
+
+  /* Cap specular */
+  var capSpec = ctx.createRadialGradient(-capW*0.4, capY+capH*0.2, 0, -capW*0.4, capY+capH*0.2, capW*0.6);
+  capSpec.addColorStop(0,'rgba(255,255,255,0.35)');
+  capSpec.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle = capSpec;
+  ctx.beginPath();
+  roundedRect(ctx, -capW, capY, capW*2, capH, 8);
+  ctx.fill();
+
+  ctx.strokeStyle = 'rgba(201,169,110,0.4)';
+  ctx.lineWidth = 0.7;
+  ctx.beginPath();
+  roundedRect(ctx, -capW, capY, capW*2, capH, 8);
+  ctx.stroke();
+
+  ctx.restore();
+
+  /* ══════════════════════════════
+     ATOMISER NOZZLE (top)
+  ══════════════════════════════ */
+  ctx.save();
+  ctx.transform(1, 0, skewX/h, 1, 0, 0);
+  var nozW = capW * 0.22;
+  var nozY = capY - 18;
+  ctx.beginPath();
+  ctx.rect(-nozW/2, nozY, nozW, 20);
+  var nozGrad = ctx.createLinearGradient(-nozW/2, 0, nozW/2, 0);
+  nozGrad.addColorStop(0,'rgba(255,255,255,0.3)');
+  nozGrad.addColorStop(0.4, theme.cap);
+  nozGrad.addColorStop(1, darkenHex(theme.cap,30));
+  ctx.fillStyle = nozGrad;
+  ctx.fill();
+  /* nozzle tip */
+  ctx.beginPath();
+  ctx.arc(0, nozY, nozW*0.8, 0, Math.PI*2);
+  ctx.fillStyle = '#C9A96E';
+  ctx.fill();
+  ctx.restore();
+
+  /* ══════════════════════════════
+     MIST SPRAY EFFECT (intermittent)
+  ══════════════════════════════ */
+  var sprayPhase = (t * 0.4) % 1;
+  if(sprayPhase < 0.18){
+    ctx.save();
+    ctx.transform(1, 0, skewX/h, 1, 0, 0);
+    var sprayAlpha = sprayPhase < 0.09 ? sprayPhase/0.09 : (0.18-sprayPhase)/0.09;
+    sprayAlpha *= 0.6;
+    var numDrops = 14;
+    for(var di=0; di<numDrops; di++){
+      var da = -Math.PI*0.55 + (di/(numDrops-1)) * Math.PI * 0.5;
+      var dr = 15 + 35 * (sprayPhase/0.18) + Math.random()*12;
+      var dsx = Math.cos(da)*dr; var dsy = Math.sin(da)*dr;
+      var sprayCapY = capY - 20;
+      var dropGrad = ctx.createRadialGradient(dsx, sprayCapY+dsy, 0, dsx, sprayCapY+dsy, 4);
+      dropGrad.addColorStop(0, 'rgba(220,240,255,' + sprayAlpha + ')');
+      dropGrad.addColorStop(1, 'rgba(220,240,255,0)');
+      ctx.beginPath(); ctx.arc(dsx, sprayCapY+dsy, 2+Math.random()*3, 0, Math.PI*2);
+      ctx.fillStyle = dropGrad; ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  ctx.restore(); /* main save */
+}
+
+/* ─ Path helpers ─ */
+function bottleBodyPath(ctx, cx, cy, w, h, r){
+  var x = cx - w/2, y = cy - h/2;
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+}
+
+function roundedRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
   ctx.quadraticCurveTo(x+w,y,x+w,y+r);
   ctx.lineTo(x+w,y+h-r);
   ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
@@ -864,24 +1104,36 @@ function roundRect(ctx,x,y,w,h,r){
   ctx.closePath();
 }
 
-function lighten(hex,amt){
-  var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+function lighten(hex, amt){
+  if(hex.indexOf('#')===0) hex=hex.slice(1);
+  var r=parseInt(hex.slice(0,2),16), g=parseInt(hex.slice(2,4),16), b=parseInt(hex.slice(4,6),16);
   return 'rgb('+Math.min(255,r+amt)+','+Math.min(255,g+amt)+','+Math.min(255,b+amt)+')';
 }
-function darken(hex,amt){
-  var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+function darkenHex(hex, amt){
+  if(hex.indexOf('#')===0) hex=hex.slice(1);
+  var r=parseInt(hex.slice(0,2),16), g=parseInt(hex.slice(2,4),16), b=parseInt(hex.slice(4,6),16);
   return 'rgb('+Math.max(0,r-amt)+','+Math.max(0,g-amt)+','+Math.max(0,b-amt)+')';
 }
 
-/* ─ SIMULATION MODE (camera denied) ─ */
+/* ─ Colour swatch ─ */
+function setBottleColor(idx, el){
+  bottleColorIdx = idx;
+  document.querySelectorAll('.swatch').forEach(function(s){ s.classList.remove('active-swatch'); });
+  el.classList.add('active-swatch');
+  showToast('Colour changed', bottleColors[idx].label);
+}
+
+/* ═══════════════════════════════════════════
+   SIMULATION MODE (no camera)
+═══════════════════════════════════════════ */
 function runSimulationMode(mode){
-  var vid = document.getElementById('ar-video');
-  vid.style.background = 'radial-gradient(ellipse at 30% 40%, #1A1005, #0D0A07 70%)';
-  showToast('Camera off — running demo mode', 'Simulation Active');
+  showToast('Camera off — running demo mode','Simulation Active');
   simulateSurfaceDetection();
 }
 
-/* ─ PRODUCT SWITCH ─ */
+/* ═══════════════════════════════════════════
+   PRODUCT SWITCH
+═══════════════════════════════════════════ */
 function switchProduct(i, el){
   curProduct = i;
   var p = products[i];
@@ -892,61 +1144,45 @@ function switchProduct(i, el){
   nr.innerHTML = p.notes.map(function(n){ return '<span class="note-pill">'+n+'</span>'; }).join('');
   document.querySelectorAll('.mode-tab').forEach(function(t){ t.classList.remove('active'); });
   el.classList.add('active');
-  /* Re-launch aura with new product */
   if(arMode === 'aura' && auraActive){
     clearInterval(particleInterval);
     var overlay = document.getElementById('aura-overlay');
     overlay.innerHTML = '';
     launchAura();
   }
-  if(arMode === 'bottle' && bottleActive){
-    var canvas = document.getElementById('bottle-canvas');
-    canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
-  }
 }
 
-/* ─ BACK TO LANDING ─ */
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
 function backToLanding(){
   auraActive = false; bottleActive = false;
   clearInterval(particleInterval);
+  cancelAnimationFrame(raf);
   if(arStream){ arStream.getTracks().forEach(function(t){t.stop()}); arStream=null; }
   document.getElementById('ar-view').classList.remove('active');
   document.getElementById('hud').classList.remove('active');
   document.getElementById('aura-overlay').classList.remove('active');
   document.getElementById('aura-overlay').innerHTML = '';
   document.getElementById('bottle-canvas').classList.remove('active');
+  document.getElementById('bottle-canvas').style.pointerEvents = 'none';
+  document.getElementById('color-swatches').classList.remove('active');
+  document.getElementById('bottle-controls').classList.remove('active');
   var ctx = document.getElementById('bottle-canvas').getContext('2d');
   ctx.clearRect(0,0,9999,9999);
   document.getElementById('landing').classList.remove('hide');
   document.getElementById('hud-bottom').classList.remove('show');
 }
 
-/* ─ INGREDIENT VIEW ─ */
-function showIngredients(){
-  document.getElementById('landing').classList.add('hide');
-  document.getElementById('ingredient-view').classList.add('active');
-}
-function hideIngredients(){
-  document.getElementById('ingredient-view').classList.remove('active');
-  document.getElementById('landing').classList.remove('hide');
-}
+function showIngredients(){ document.getElementById('landing').classList.add('hide'); document.getElementById('ingredient-view').classList.add('active'); }
+function hideIngredients(){ document.getElementById('ingredient-view').classList.remove('active'); document.getElementById('landing').classList.remove('hide'); }
+function showStory(){ document.getElementById('landing').classList.add('hide'); document.getElementById('story-view').classList.add('active'); }
+function hideStory(){ document.getElementById('story-view').classList.remove('active'); document.getElementById('landing').classList.remove('hide'); }
+function highlightIngredient(id){ var n={assam:'Assam Oud',taif:'Taif Rose',france:'Grasse Musk',cambodia:'Cambodian Oud',zanzibar:'Zanzibar Clove'}; showToast('Tap a card below to learn more', n[id]||id); }
 
-/* ─ STORY VIEW ─ */
-function showStory(){
-  document.getElementById('landing').classList.add('hide');
-  document.getElementById('story-view').classList.add('active');
-}
-function hideStory(){
-  document.getElementById('story-view').classList.remove('active');
-  document.getElementById('landing').classList.remove('hide');
-}
-
-function highlightIngredient(id){
-  var names = {assam:'Assam Oud',taif:'Taif Rose',france:'Grasse Musk',cambodia:'Cambodian Oud',zanzibar:'Zanzibar Clove'};
-  showToast('Tap a card below to learn more', names[id] || id);
-}
-
-/* ─ TOAST ─ */
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
 var toastT;
 function showToast(msg, title){
   clearTimeout(toastT);
