@@ -4,220 +4,94 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Ajmal — WebAR Scent Experience</title>
+<title>Ajmal — WebAR</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
-:root {
-  --gold:#C9A96E; --gold-l:#F0DEB0; --gold-d:#8B6914;
-  --ink:#0D0A07; --sand:#F5EFE6; --sand2:rgba(245,239,230,0.55);
-  --oud:#6B3E26; --rose:#B05478; --teal:#1D9E75; --violet:#5C4A8A;
-  --f-display:'Cormorant Garamond',Georgia,serif;
+:root{
+  --gold:#C9A96E;--gold-l:#F0DEB0;--gold-d:#8B6914;
+  --ink:#0D0A07;--sand:#F5EFE6;--sand2:rgba(245,239,230,0.55);
+  --f-disp:'Cormorant Garamond',Georgia,serif;
   --f-body:'DM Sans',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);font-family:var(--f-body)}
 
-/* ── LOADING SCREEN ── */
-#loading{
-  position:fixed;inset:0;z-index:1000;
-  background:var(--ink);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
-  transition:opacity 0.8s ease;
-}
+/* ── LOADING ── */
+#loading{position:fixed;inset:0;z-index:1000;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.8s}
 #loading.hide{opacity:0;pointer-events:none}
-.load-logo{font-family:var(--f-display);font-size:36px;font-weight:300;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase}
+.load-logo{font-family:var(--f-disp);font-size:34px;font-weight:300;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase}
 .load-logo em{font-style:italic;color:var(--gold-l)}
-.load-ring{width:48px;height:48px;border:1px solid rgba(201,169,110,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
-.load-text{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,239,230,0.35)}
+.load-ring{width:44px;height:44px;border:1px solid rgba(201,169,110,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+.load-text{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,239,230,0.35)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── LANDING ── */
-#landing{
-  position:fixed;inset:0;z-index:900;
-  background:var(--ink);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:32px 24px;
-  transition:opacity 0.5s;
-}
+#landing{position:fixed;inset:0;z-index:900;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;transition:opacity 0.4s}
 #landing.hide{opacity:0;pointer-events:none}
-.land-eyebrow{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.land-eyebrow::before,.land-eyebrow::after{content:'';width:30px;height:0.5px;background:var(--gold);opacity:0.5}
-.land-title{font-family:var(--f-display);font-size:clamp(32px,8vw,54px);font-weight:300;color:var(--sand);text-align:center;line-height:1.15;margin-bottom:10px}
+.eyebrow{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.eyebrow::before,.eyebrow::after{content:'';width:28px;height:0.5px;background:var(--gold);opacity:0.5}
+.land-title{font-family:var(--f-disp);font-size:clamp(30px,7vw,50px);font-weight:300;color:var(--sand);text-align:center;line-height:1.15;margin-bottom:8px}
 .land-title em{font-style:italic;color:var(--gold)}
-.land-sub{font-size:13px;color:var(--sand2);text-align:center;max-width:320px;line-height:1.7;margin-bottom:40px;font-weight:300}
-.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:380px;margin-bottom:24px}
-.mode-card{
-  background:rgba(201,169,110,0.05);
-  border:0.5px solid rgba(201,169,110,0.2);
-  border-radius:14px;padding:20px 16px;
-  cursor:pointer;text-align:center;
-  transition:all 0.25s;
-  -webkit-tap-highlight-color:transparent;
-}
+.land-sub{font-size:12px;color:var(--sand2);text-align:center;max-width:300px;line-height:1.7;margin-bottom:32px;font-weight:300}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:370px;margin-bottom:20px}
+.mode-card{background:rgba(201,169,110,0.05);border:0.5px solid rgba(201,169,110,0.2);border-radius:14px;padding:18px 14px;cursor:pointer;text-align:center;transition:all 0.22s;-webkit-tap-highlight-color:transparent}
 .mode-card:hover,.mode-card:active{background:rgba(201,169,110,0.12);border-color:var(--gold);transform:translateY(-2px)}
-.mode-icon{font-size:28px;margin-bottom:10px;display:block}
-.mode-title{font-family:var(--f-display);font-size:16px;font-weight:400;color:var(--sand);margin-bottom:4px}
+.mode-icon{font-size:26px;margin-bottom:8px;display:block}
+.mode-title{font-family:var(--f-disp);font-size:15px;font-weight:400;color:var(--sand);margin-bottom:3px}
 .mode-desc{font-size:10px;color:var(--sand2);line-height:1.5;font-weight:300}
-.land-note{font-size:10px;color:rgba(245,239,230,0.25);text-align:center;letter-spacing:0.05em}
+.land-note{font-size:9px;color:rgba(245,239,230,0.22);text-align:center;letter-spacing:0.05em}
 
-/* ── AR VIEWPORT ── */
-#ar-view{position:fixed;inset:0;z-index:10;display:none}
-#ar-view.active{display:block}
-video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+/* ── AR / SIM CANVAS ── */
+#ar-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:10;display:none}
+#ar-video.active{display:block}
+#main-canvas{position:fixed;inset:0;z-index:20;display:none;pointer-events:auto}
+#main-canvas.active{display:block}
 
 /* ── HUD ── */
 #hud{position:fixed;inset:0;z-index:500;pointer-events:none;display:none}
 #hud.active{display:block}
-.hud-top{
-  position:absolute;top:0;left:0;right:0;
-  padding:16px 20px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(to bottom,rgba(13,10,7,0.7),transparent);
-  pointer-events:auto;
-}
-.hud-logo{font-family:var(--f-display);font-size:22px;font-weight:300;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase}
+.hud-top{position:absolute;top:0;left:0;right:0;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(13,10,7,0.7),transparent);pointer-events:auto}
+.hud-logo{font-family:var(--f-disp);font-size:20px;font-weight:300;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase}
 .hud-logo em{font-style:italic;color:var(--gold-l)}
-.hud-back{
-  font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(245,239,230,0.5);
-  background:rgba(13,10,7,0.5);border:0.5px solid rgba(201,169,110,0.2);
-  border-radius:99px;padding:6px 14px;cursor:pointer;
-  pointer-events:auto;-webkit-tap-highlight-color:transparent;
-}
-.scan-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
-.scan-ring{
-  width:160px;height:160px;border:1px solid rgba(201,169,110,0.4);border-radius:50%;
-  margin:0 auto 16px;position:relative;animation:breathe 2.5s ease-in-out infinite;
-}
-.scan-ring::before,.scan-ring::after{content:'';position:absolute;width:16px;height:16px;border-color:var(--gold);border-style:solid}
-.scan-ring::before{top:-1px;left:-1px;border-width:2px 0 0 2px;border-radius:4px 0 0 0}
-.scan-ring::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;border-radius:0 0 4px 0}
-@keyframes breathe{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.05);opacity:1}}
-.scan-text{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,169,110,0.7)}
-#scan-hint-wrap{transition:opacity 0.5s}
-#scan-hint-wrap.hide{opacity:0}
-.hud-bottom{
-  position:absolute;bottom:0;left:0;right:0;
-  background:linear-gradient(to top,rgba(13,10,7,0.92) 0%,rgba(13,10,7,0.4) 80%,transparent 100%);
-  padding:24px 20px 36px;
-  transform:translateY(100%);
-  transition:transform 0.5s cubic-bezier(.4,0,.2,1);
-  pointer-events:auto;
-}
-.hud-bottom.show{transform:translateY(0)}
-.product-eyebrow{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:6px}
-.product-name{font-family:var(--f-display);font-size:26px;font-weight:300;color:var(--sand);margin-bottom:4px}
-.product-sub{font-size:11px;color:var(--sand2);font-weight:300;margin-bottom:16px}
-.note-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.note-pill{font-size:10px;padding:4px 12px;border-radius:99px;letter-spacing:0.05em;border:0.5px solid rgba(201,169,110,0.25);color:var(--gold-l);background:rgba(201,169,110,0.08)}
-.action-row{display:flex;gap:10px}
-.ar-btn{flex:1;padding:12px;border-radius:10px;font-size:11px;font-family:var(--f-body);letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all 0.2s}
-.ar-btn-primary{background:rgba(201,169,110,0.15);border:0.5px solid var(--gold);color:var(--gold)}
-.ar-btn-primary:hover{background:rgba(201,169,110,0.25)}
-.ar-btn-secondary{background:transparent;border:0.5px solid rgba(245,239,230,0.15);color:rgba(245,239,230,0.45)}
-.ar-btn-secondary:hover{border-color:rgba(245,239,230,0.3);color:rgba(245,239,230,0.7)}
-.mode-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
-.mode-tabs::-webkit-scrollbar{display:none}
-.mode-tab{flex-shrink:0;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border-radius:99px;cursor:pointer;border:0.5px solid rgba(201,169,110,0.2);color:rgba(245,239,230,0.4);background:transparent;font-family:var(--f-body);transition:all 0.2s;-webkit-tap-highlight-color:transparent}
-.mode-tab.active{background:rgba(201,169,110,0.15);border-color:var(--gold);color:var(--gold)}
+.btn-back{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,230,0.5);background:rgba(13,10,7,0.5);border:0.5px solid rgba(201,169,110,0.2);border-radius:99px;padding:6px 13px;cursor:pointer;pointer-events:auto;-webkit-tap-highlight-color:transparent}
 
-/* ── AURA OVERLAY ── */
-#aura-overlay{position:fixed;inset:0;z-index:30;pointer-events:none;display:none;overflow:hidden}
-#aura-overlay.active{display:block}
-.note-particle{position:absolute;border-radius:50%;pointer-events:none;animation:float-particle linear infinite;opacity:0}
-@keyframes float-particle{
-  0%{transform:translate(0,0) scale(0.5);opacity:0}
-  10%{opacity:var(--op,0.6)}
-  80%{opacity:var(--op,0.4)}
-  100%{transform:translate(var(--tx,0px),var(--ty,-200px)) scale(1.5);opacity:0}
-}
-.aura-ring{position:absolute;border-radius:50%;border:1px solid;transform:translate(-50%,-50%);pointer-events:none;animation:expand-ring ease-out infinite;opacity:0}
-@keyframes expand-ring{0%{transform:translate(-50%,-50%) scale(0.3);opacity:0.8}100%{transform:translate(-50%,-50%) scale(3);opacity:0}}
+/* Place hint */
+#place-hint{position:fixed;bottom:200px;left:50%;transform:translateX(-50%);z-index:502;text-align:center;pointer-events:none;transition:opacity 0.5s}
+#place-hint.hide{opacity:0}
+.place-ring{width:56px;height:20px;border:1.5px solid rgba(201,169,110,0.6);border-radius:50%;margin:0 auto 10px;animation:breathe 2s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.place-text{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(201,169,110,0.8)}
 
-/* ── BOTTLE CANVAS ── */
-#bottle-canvas{position:fixed;inset:0;z-index:25;display:none;pointer-events:none}
-#bottle-canvas.active{display:block}
+/* Drag hint */
+#drag-hint{position:fixed;bottom:200px;left:50%;transform:translateX(-50%);z-index:502;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(201,169,110,0.45);background:rgba(13,10,7,0.4);border:0.5px solid rgba(201,169,110,0.15);border-radius:99px;padding:5px 14px;pointer-events:none;display:none}
+#drag-hint.show{display:block}
 
-/* ── BOTTLE CONTROLS (gesture hint) ── */
-#bottle-controls{
-  position:fixed;bottom:160px;left:50%;transform:translateX(-50%);
-  z-index:501;display:none;
-  flex-direction:column;align-items:center;gap:6px;
-  pointer-events:none;
-}
-#bottle-controls.active{display:flex}
-.ctrl-hint{
-  font-size:9px;letter-spacing:0.12em;text-transform:uppercase;
-  color:rgba(201,169,110,0.5);
-  background:rgba(13,10,7,0.5);
-  border:0.5px solid rgba(201,169,110,0.15);
-  border-radius:99px;padding:5px 14px;
-}
-
-/* ── INGREDIENT VIEW ── */
-#ingredient-view{position:fixed;inset:0;z-index:800;background:var(--ink);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
-#ingredient-view.active{display:block}
-.ing-header{padding:60px 24px 32px;text-align:center;position:relative}
-.ing-back{position:absolute;top:20px;left:20px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,230,0.4);background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);border-radius:99px;padding:7px 14px;cursor:pointer}
-.ing-title{font-family:var(--f-display);font-size:32px;font-weight:300;color:var(--gold);margin-bottom:6px}
-.ing-sub{font-size:12px;color:var(--sand2);font-weight:300}
-.world-map-wrap{position:relative;width:100%;padding:0 16px;margin-bottom:32px}
-.world-map-svg{width:100%;height:auto;opacity:0.25;filter:brightness(0.8)}
-.map-pin{position:absolute;cursor:pointer;transform:translate(-50%,-50%);animation:pin-pulse 2s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
-@keyframes pin-pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
-.pin-dot{width:10px;height:10px;border-radius:50%;border:2px solid;margin:0 auto 4px}
-.pin-ring{position:absolute;top:50%;left:50%;width:24px;height:24px;border-radius:50%;transform:translate(-50%,-60%);border:1px solid;animation:pin-ring 2s ease-out infinite;opacity:0}
-@keyframes pin-ring{0%{transform:translate(-50%,-60%) scale(0.5);opacity:0.8}100%{transform:translate(-50%,-60%) scale(2.5);opacity:0}}
-.pin-label{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;text-align:center;white-space:nowrap;margin-top:2px}
-.ingredient-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px 40px}
-.ing-card{background:rgba(201,169,110,0.04);border:0.5px solid rgba(201,169,110,0.15);border-radius:14px;padding:18px 16px;cursor:pointer;transition:all 0.25s}
-.ing-card:hover{background:rgba(201,169,110,0.09);border-color:rgba(201,169,110,0.35);transform:translateY(-2px)}
-.ing-icon{font-size:24px;margin-bottom:10px}
-.ing-name{font-family:var(--f-display);font-size:16px;font-weight:400;color:var(--gold);margin-bottom:2px}
-.ing-origin{font-size:10px;color:var(--sand2);letter-spacing:0.05em;margin-bottom:8px}
-.ing-desc{font-size:11px;color:rgba(245,239,230,0.4);line-height:1.6;font-weight:300}
-.ing-note-type{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:99px;display:inline-block;margin-top:8px}
-
-/* ── STORY VIEW ── */
-#story-view{position:fixed;inset:0;z-index:850;background:var(--ink);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
-#story-view.active{display:block}
-.story-hero{position:relative;min-height:55vh;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 24px 32px;overflow:hidden}
-.story-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(107,62,38,0.4),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(201,169,110,0.15),transparent 50%)}
-.story-year{font-family:var(--f-display);font-size:120px;font-weight:300;color:rgba(201,169,110,0.08);position:absolute;top:20px;right:-10px;line-height:1;letter-spacing:-4px;pointer-events:none}
-.story-back{position:absolute;top:20px;left:20px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,230,0.4);background:rgba(13,10,7,0.5);border:0.5px solid rgba(255,255,255,0.1);border-radius:99px;padding:7px 14px;cursor:pointer;z-index:2}
-.story-eyebrow{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:10px;position:relative;z-index:2}
-.story-title{font-family:var(--f-display);font-size:clamp(28px,7vw,48px);font-weight:300;color:var(--sand);line-height:1.2;margin-bottom:8px;position:relative;z-index:2}
-.story-title em{font-style:italic;color:var(--gold)}
-.story-sub{font-size:12px;color:var(--sand2);font-weight:300;line-height:1.7;max-width:340px;position:relative;z-index:2}
-.story-chapters{padding:0 24px 48px}
-.chapter{border-left:1px solid rgba(201,169,110,0.15);padding:24px 0 24px 24px;position:relative}
-.chapter::before{content:'';position:absolute;left:-5px;top:28px;width:9px;height:9px;border-radius:50%;background:var(--ink);border:1px solid var(--gold)}
-.ch-year{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:4px}
-.ch-title{font-family:var(--f-display);font-size:20px;font-weight:300;color:var(--sand);margin-bottom:8px}
-.ch-body{font-size:12px;color:rgba(245,239,230,0.45);line-height:1.8;font-weight:300}
-.ch-stat{margin-top:14px;background:rgba(201,169,110,0.06);border:0.5px solid rgba(201,169,110,0.15);border-radius:10px;padding:12px 16px;font-size:11px;color:var(--gold-l)}
-.ch-stat strong{font-family:var(--f-display);font-size:22px;font-weight:300;color:var(--gold);display:block;margin-bottom:2px}
+/* ── BOTTOM PANEL ── */
+#panel{position:fixed;bottom:0;left:0;right:0;z-index:503;background:linear-gradient(to top,rgba(13,10,7,0.96) 0%,rgba(13,10,7,0.5) 85%,transparent);padding:18px 18px 32px;transform:translateY(100%);transition:transform 0.5s cubic-bezier(.4,0,.2,1);pointer-events:auto}
+#panel.show{transform:translateY(0)}
+.prod-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.prod-tabs::-webkit-scrollbar{display:none}
+.prod-tab{flex-shrink:0;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:5px 13px;border-radius:99px;cursor:pointer;border:0.5px solid rgba(201,169,110,0.2);color:rgba(245,239,230,0.4);background:transparent;font-family:var(--f-body);transition:all 0.2s;-webkit-tap-highlight-color:transparent}
+.prod-tab.act{background:rgba(201,169,110,0.15);border-color:var(--gold);color:var(--gold)}
+.p-ey{font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:4px}
+.p-nm{font-family:var(--f-disp);font-size:24px;font-weight:300;color:var(--sand);margin-bottom:3px}
+.p-sb{font-size:10px;color:var(--sand2);font-weight:300;margin-bottom:12px}
+.note-row{display:flex;gap:7px;margin-bottom:13px;flex-wrap:wrap}
+.pill{font-size:9px;padding:3px 11px;border-radius:99px;border:0.5px solid rgba(201,169,110,0.25);color:var(--gold-l);background:rgba(201,169,110,0.08)}
+.act-row{display:flex;gap:8px}
+.abtn{flex:1;padding:11px;border-radius:9px;font-size:10px;font-family:var(--f-body);letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all 0.2s}
+.abtn-p{background:rgba(201,169,110,0.15);border:0.5px solid var(--gold);color:var(--gold)}
+.abtn-p:hover{background:rgba(201,169,110,0.26)}
+.abtn-s{background:transparent;border:0.5px solid rgba(245,239,230,0.15);color:rgba(245,239,230,0.4)}
 
 /* ── TOAST ── */
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(20,14,8,0.95);border:0.5px solid rgba(201,169,110,0.3);border-radius:12px;padding:12px 20px;z-index:2000;font-size:12px;color:var(--sand2);text-align:center;white-space:nowrap;transition:transform 0.3s cubic-bezier(.4,0,.2,1);pointer-events:none}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(20,14,8,0.95);border:0.5px solid rgba(201,169,110,0.3);border-radius:11px;padding:10px 18px;z-index:2000;font-size:11px;color:var(--sand2);text-align:center;white-space:nowrap;transition:transform 0.3s cubic-bezier(.4,0,.2,1);pointer-events:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
-#toast strong{color:var(--gold);font-family:var(--f-display);font-size:14px;font-weight:400;display:block;margin-bottom:2px}
+#toast strong{color:var(--gold);font-family:var(--f-disp);font-size:13px;font-weight:400;display:block;margin-bottom:1px}
 
-/* ── COLOUR SWATCH PICKER (bottle view) ── */
-#color-swatches{
-  position:fixed;right:16px;top:50%;transform:translateY(-50%);
-  z-index:502;display:none;flex-direction:column;gap:10px;
-  pointer-events:auto;
-}
-#color-swatches.active{display:flex}
-.swatch{
-  width:28px;height:28px;border-radius:50%;
-  border:2px solid transparent;cursor:pointer;
-  transition:all 0.2s;-webkit-tap-highlight-color:transparent;
-  box-shadow:0 2px 8px rgba(0,0,0,0.4);
-}
-.swatch.active-swatch{border-color:#fff;transform:scale(1.2)}
+/* ── WEBXR BUTTON ── */
+#xr-btn{position:fixed;bottom:130px;left:50%;transform:translateX(-50%);z-index:504;display:none;background:rgba(201,169,110,0.15);border:0.5px solid var(--gold);color:var(--gold);font-family:var(--f-body);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;border-radius:99px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#xr-btn.show{display:block}
 </style>
 </head>
 <body>
@@ -226,24 +100,24 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
 <div id="loading">
   <div class="load-logo">Ajmal <em>Perfumes</em></div>
   <div class="load-ring"></div>
-  <div class="load-text">Initialising WebAR Experience</div>
+  <div class="load-text">Loading Experience</div>
 </div>
 
 <!-- LANDING -->
 <div id="landing">
-  <div class="land-eyebrow">WebAR Experience</div>
-  <h1 class="land-title">The Future of<br><em>Fragrance Discovery</em></h1>
-  <p class="land-sub">No app. No download. Just open your camera — and Ajmal's world comes alive around you.</p>
+  <div class="eyebrow">WebAR Experience</div>
+  <h1 class="land-title">Place <em>Ajmal</em><br>in Your World</h1>
+  <p class="land-sub">Real bottles, real fragrances — placed on your actual floor through augmented reality.</p>
   <div class="mode-grid">
-    <div class="mode-card" onclick="startAR('aura')">
-      <span class="mode-icon">✨</span>
-      <div class="mode-title">Scent Aura</div>
-      <div class="mode-desc">See fragrance notes float to life in your space</div>
-    </div>
-    <div class="mode-card" onclick="startAR('bottle')">
+    <div class="mode-card" onclick="startBottleAR()">
       <span class="mode-icon">🧴</span>
       <div class="mode-title">Bottle in Space</div>
-      <div class="mode-desc">Place a premium 3D Ajmal bottle in your room</div>
+      <div class="mode-desc">Place a real Ajmal bottle on your floor via AR</div>
+    </div>
+    <div class="mode-card" onclick="startAura()">
+      <span class="mode-icon">✨</span>
+      <div class="mode-title">Scent Aura</div>
+      <div class="mode-desc">See fragrance notes float around you</div>
     </div>
     <div class="mode-card" onclick="showIngredients()">
       <span class="mode-icon">🌍</span>
@@ -253,945 +127,1047 @@ video#ar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover
     <div class="mode-card" onclick="showStory()">
       <span class="mode-icon">📖</span>
       <div class="mode-title">Brand Story</div>
-      <div class="mode-desc">70 years of heritage — in augmented reality</div>
+      <div class="mode-desc">70 years of heritage · Since 1951</div>
     </div>
   </div>
-  <div class="land-note">Works in Chrome & Safari · No app required · Camera access needed for AR</div>
+  <div class="land-note">Works in Chrome & Safari · Camera needed for AR</div>
 </div>
 
-<!-- AR VIEW -->
-<div id="ar-view">
-  <video id="ar-video" autoplay playsinline muted></video>
-</div>
+<!-- CAMERA -->
+<video id="ar-video" autoplay playsinline muted></video>
 
-<!-- PARTICLE AURA OVERLAY -->
-<div id="aura-overlay"></div>
-
-<!-- BOTTLE 3D CANVAS -->
-<canvas id="bottle-canvas"></canvas>
-
-<!-- COLOUR SWATCHES (bottle mode) -->
-<div id="color-swatches">
-  <div class="swatch active-swatch" style="background:linear-gradient(135deg,#C9A96E,#8B6914)" onclick="setBottleColor(0,this)" title="Amber Gold"></div>
-  <div class="swatch" style="background:linear-gradient(135deg,#B05478,#7A2448)" onclick="setBottleColor(1,this)" title="Rose Blush"></div>
-  <div class="swatch" style="background:linear-gradient(135deg,#5C4A8A,#2E2050)" onclick="setBottleColor(2,this)" title="Royal Violet"></div>
-  <div class="swatch" style="background:linear-gradient(135deg,#1D9E75,#0D5C43)" onclick="setBottleColor(3,this)" title="Teal Musk"></div>
-  <div class="swatch" style="background:linear-gradient(135deg,#2A2A2A,#111)" onclick="setBottleColor(4,this)" title="Obsidian"></div>
-</div>
-
-<!-- BOTTLE CONTROLS HINT -->
-<div id="bottle-controls">
-  <div class="ctrl-hint">Drag to rotate · Pinch to scale</div>
-</div>
+<!-- MAIN CANVAS (bottle + aura) -->
+<canvas id="main-canvas"></canvas>
 
 <!-- HUD -->
 <div id="hud">
   <div class="hud-top">
     <div class="hud-logo">Ajmal <em>Perfumes</em></div>
-    <div class="hud-back" onclick="backToLanding()">← Back</div>
+    <div class="btn-back" onclick="backToLanding()">← Back</div>
   </div>
-  <div id="scan-hint-wrap" class="scan-hint">
-    <div class="scan-ring"></div>
-    <div class="scan-text" id="scan-text">Point at a flat surface</div>
+</div>
+
+<!-- PLACE HINT -->
+<div id="place-hint">
+  <div class="place-ring"></div>
+  <div class="place-text" id="place-text">Tap the floor to place bottle</div>
+</div>
+
+<!-- DRAG HINT -->
+<div id="drag-hint">Drag to rotate</div>
+
+<!-- WebXR launch button -->
+<button id="xr-btn" onclick="startWebXR()">✦ Enable True AR Floor</button>
+
+<!-- BOTTOM PANEL -->
+<div id="panel">
+  <div class="prod-tabs" id="prod-tabs"></div>
+  <div class="p-ey" id="p-ey"></div>
+  <div class="p-nm" id="p-nm"></div>
+  <div class="p-sb" id="p-sb"></div>
+  <div class="note-row" id="p-notes"></div>
+  <div class="act-row">
+    <button class="abtn abtn-p" id="wishlist-btn">Add to Wishlist</button>
+    <button class="abtn abtn-s" onclick="showToast('Opening store locator…','Nearest: Phoenix Marketcity')">Find in Store</button>
   </div>
-  <div class="hud-bottom" id="hud-bottom">
-    <div class="mode-tabs" id="mode-tabs">
-      <button class="mode-tab active" onclick="switchProduct(0,this)">Dahn Al Oudh</button>
-      <button class="mode-tab" onclick="switchProduct(1,this)">Aurum</button>
-      <button class="mode-tab" onclick="switchProduct(2,this)">Mukhallat Malaki</button>
-      <button class="mode-tab" onclick="switchProduct(3,this)">Wisal</button>
+</div>
+
+<!-- INGREDIENT VIEW (inline) -->
+<div id="ingredient-view" style="position:fixed;inset:0;z-index:800;background:var(--ink);display:none;overflow-y:auto">
+  <div style="padding:56px 20px 32px;text-align:center;position:relative">
+    <div onclick="hideIngredients()" style="position:absolute;top:18px;left:18px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,230,0.4);background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);border-radius:99px;padding:6px 13px;cursor:pointer">← Back</div>
+    <div style="font-family:var(--f-disp);font-size:30px;font-weight:300;color:var(--gold);margin-bottom:4px">Ingredient Journey</div>
+    <div style="font-size:11px;color:var(--sand2);font-weight:300;margin-bottom:28px">From earth to essence — every note traced to origin</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 48px">
+    <div onclick="showToast('Origin: Assam, India','Agarwood Oud')" style="background:rgba(201,169,110,0.04);border:0.5px solid rgba(201,169,110,0.15);border-radius:13px;padding:16px 14px;cursor:pointer">
+      <div style="font-size:22px;margin-bottom:8px">🌳</div>
+      <div style="font-family:var(--f-disp);font-size:15px;color:var(--gold);margin-bottom:2px">Agarwood Oud</div>
+      <div style="font-size:9px;color:var(--sand2);margin-bottom:6px">Assam, India · 40yr trees</div>
+      <div style="font-size:10px;color:rgba(245,239,230,0.4);line-height:1.6">The rarest resin — liquid gold worth more than silver, formed in infected Aquilaria trees.</div>
+      <div style="font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 9px;border-radius:99px;display:inline-block;margin-top:7px;background:rgba(201,169,110,0.1);color:var(--gold);border:0.5px solid rgba(201,169,110,0.2)">Base note</div>
     </div>
-    <div class="product-eyebrow" id="p-eyebrow">Oud Collection · Top Match 97%</div>
-    <div class="product-name" id="p-name">Dahn Al Oudh Moattaq</div>
-    <div class="product-sub" id="p-sub">Deep oud · Amber · Saffron · Long-lasting</div>
-    <div class="note-row" id="p-notes">
-      <span class="note-pill">Oud</span>
-      <span class="note-pill">Amber</span>
-      <span class="note-pill">Saffron</span>
-      <span class="note-pill">Musk</span>
+    <div onclick="showToast('Origin: Taif, Saudi Arabia','Taif Rose')" style="background:rgba(201,169,110,0.04);border:0.5px solid rgba(201,169,110,0.15);border-radius:13px;padding:16px 14px;cursor:pointer">
+      <div style="font-size:22px;margin-bottom:8px">🌹</div>
+      <div style="font-family:var(--f-disp);font-size:15px;color:var(--gold);margin-bottom:2px">Taif Rose</div>
+      <div style="font-size:9px;color:var(--sand2);margin-bottom:6px">Taif, Saudi Arabia · April harvest</div>
+      <div style="font-size:10px;color:rgba(245,239,230,0.4);line-height:1.6">Hand-picked at dawn. One gram of oil requires 1,000 flowers distilled by families for centuries.</div>
+      <div style="font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 9px;border-radius:99px;display:inline-block;margin-top:7px;background:rgba(176,84,120,0.1);color:#D4537E;border:0.5px solid rgba(176,84,120,0.2)">Heart note</div>
     </div>
-    <div class="action-row">
-      <button class="ar-btn ar-btn-primary" onclick="showToast('Added to wishlist','Dahn Al Oudh Moattaq')">Add to wishlist</button>
-      <button class="ar-btn ar-btn-secondary" onclick="showToast('Opening store locator...','Nearest store: Dubai Mall')">Find in store</button>
+    <div onclick="showToast('Origin: Iran / Kashmir','Saffron')" style="background:rgba(201,169,110,0.04);border:0.5px solid rgba(201,169,110,0.15);border-radius:13px;padding:16px 14px;cursor:pointer">
+      <div style="font-size:22px;margin-bottom:8px">✨</div>
+      <div style="font-family:var(--f-disp);font-size:15px;color:var(--gold);margin-bottom:2px">Saffron</div>
+      <div style="font-size:9px;color:var(--sand2);margin-bottom:6px">Iran · Kashmiri highlands</div>
+      <div style="font-size:10px;color:rgba(245,239,230,0.4);line-height:1.6">World's most expensive spice — adds warm metallic richness defining Arabic fragrances.</div>
+      <div style="font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 9px;border-radius:99px;display:inline-block;margin-top:7px;background:rgba(201,169,110,0.08);color:#BA7517;border:0.5px solid rgba(201,169,110,0.2)">Top note</div>
+    </div>
+    <div onclick="showToast('Origin: Grasse, France','White Musk')" style="background:rgba(201,169,110,0.04);border:0.5px solid rgba(201,169,110,0.15);border-radius:13px;padding:16px 14px;cursor:pointer">
+      <div style="font-size:22px;margin-bottom:8px">❄️</div>
+      <div style="font-family:var(--f-disp);font-size:15px;color:var(--gold);margin-bottom:2px">White Musk</div>
+      <div style="font-size:9px;color:var(--sand2);margin-bottom:6px">Grasse, France · Ethical origin</div>
+      <div style="font-size:10px;color:rgba(245,239,230,0.4);line-height:1.6">The invisible signature — binds every note and leaves a lingering trail long after application.</div>
+      <div style="font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 9px;border-radius:99px;display:inline-block;margin-top:7px;background:rgba(29,158,117,0.1);color:#1D9E75;border:0.5px solid rgba(29,158,117,0.2)">Base note</div>
+    </div>
+    <div onclick="showToast('Origin: Cambodia','Cambodian Oud')" style="background:rgba(201,169,110,0.04);border:0.5px solid rgba(201,169,110,0.15);border-radius:13px;padding:16px 14px;cursor:pointer">
+      <div style="font-size:22px;margin-bottom:8px">🪵</div>
+      <div style="font-family:var(--f-disp);font-size:15px;color:var(--gold);margin-bottom:2px">Cambodian Oud</div>
+      <div style="font-size:9px;color:var(--sand2);margin-bottom:6px">Cambodia · Wild harvest</div>
+      <div style="font-size:10px;color:rgba(245,239,230,0.4);line-height:1.6">Sweeter and more honeyed than Indian oud — prized in royal perfumery for centuries.</div>
+      <div style="font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 9px;border-radius:99px;display:inline-block;margin-top:7px;background:rgba(92,74,138,0.1);color:#C4B8E8;border:0.5px solid rgba(92,74,138,0.2)">Base note</div>
+    </div>
+    <div onclick="showToast('Origin: Zanzibar','Zanzibar Clove')" style="background:rgba(201,169,110,0.04);border:0.5px solid rgba(201,169,110,0.15);border-radius:13px;padding:16px 14px;cursor:pointer">
+      <div style="font-size:22px;margin-bottom:8px">🌿</div>
+      <div style="font-family:var(--f-disp);font-size:15px;color:var(--gold);margin-bottom:2px">Zanzibar Clove</div>
+      <div style="font-size:9px;color:var(--sand2);margin-bottom:6px">Zanzibar, Tanzania</div>
+      <div style="font-size:10px;color:rgba(245,239,230,0.4);line-height:1.6">The spice island — clove gives oriental fragrances their signature warming heat.</div>
+      <div style="font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 9px;border-radius:99px;display:inline-block;margin-top:7px;background:rgba(201,113,74,0.1);color:#C9714A;border:0.5px solid rgba(201,113,74,0.2)">Top note</div>
     </div>
   </div>
 </div>
 
-<!-- INGREDIENT VIEW -->
-<div id="ingredient-view">
-  <div class="ing-header">
-    <div class="ing-back" onclick="hideIngredients()">← Back</div>
-    <div class="ing-title">Ingredient Journey</div>
-    <div class="ing-sub">From earth to essence — trace every note to its origin</div>
+<!-- STORY VIEW -->
+<div id="story-view" style="position:fixed;inset:0;z-index:850;background:var(--ink);display:none;overflow-y:auto">
+  <div style="position:relative;min-height:50vh;display:flex;flex-direction:column;justify-content:flex-end;padding:36px 22px 28px;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(107,62,38,0.4),transparent 60%)"></div>
+    <div style="font-family:var(--f-disp);font-size:110px;font-weight:300;color:rgba(201,169,110,0.07);position:absolute;top:16px;right:-8px;line-height:1;letter-spacing:-4px;pointer-events:none">1951</div>
+    <div onclick="hideStory()" style="position:absolute;top:18px;left:18px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,230,0.4);background:rgba(13,10,7,0.5);border:0.5px solid rgba(255,255,255,0.1);border-radius:99px;padding:6px 13px;cursor:pointer;z-index:2">← Back</div>
+    <div style="font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:8px;position:relative;z-index:2">Since 1951 · Dubai, UAE</div>
+    <h2 style="font-family:var(--f-disp);font-size:clamp(26px,6vw,44px);font-weight:300;color:var(--sand);line-height:1.2;margin-bottom:7px;position:relative;z-index:2">Seventy years of<br><em style="font-style:italic;color:var(--gold)">oud, heritage & soul</em></h2>
+    <p style="font-size:11px;color:var(--sand2);font-weight:300;line-height:1.7;position:relative;z-index:2">From a single shop in Ajman to 300+ fragrances loved across 50 countries.</p>
   </div>
-  <div class="world-map-wrap" style="position:relative">
-    <svg class="world-map-svg" viewBox="0 0 900 450" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="450" cy="225" rx="440" ry="215" fill="none" stroke="rgba(201,169,110,0.15)" stroke-width="1"/>
-      <path d="M390 140 Q420 120 440 160 Q460 200 450 260 Q440 320 410 340 Q380 320 370 280 Q360 240 370 200 Q375 170 390 140Z" fill="rgba(201,169,110,0.08)" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
-      <path d="M380 80 Q420 60 450 80 Q460 100 440 120 Q420 130 400 120 Q380 110 380 80Z" fill="rgba(201,169,110,0.08)" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
-      <path d="M460 130 Q500 120 520 150 Q530 180 510 200 Q490 210 470 190 Q455 170 460 130Z" fill="rgba(201,169,110,0.1)" stroke="rgba(201,169,110,0.3)" stroke-width="0.5"/>
-      <path d="M520 100 Q600 80 660 120 Q700 160 680 220 Q660 260 620 240 Q580 220 560 180 Q540 140 520 100Z" fill="rgba(201,169,110,0.08)" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
-      <path d="M600 220 Q620 240 610 280 Q590 300 570 270 Q560 240 580 220 Q590 215 600 220Z" fill="rgba(201,169,110,0.1)" stroke="rgba(201,169,110,0.25)" stroke-width="0.5"/>
-      <path d="M150 100 Q200 80 220 130 Q240 180 220 250 Q200 300 180 320 Q150 300 140 250 Q130 200 140 150 Q143 120 150 100Z" fill="rgba(201,169,110,0.05)" stroke="rgba(201,169,110,0.15)" stroke-width="0.5"/>
-      <path d="M700 150 Q740 140 760 170 Q770 190 750 210 Q720 200 710 180 Q700 165 700 150Z" fill="rgba(201,169,110,0.07)" stroke="rgba(201,169,110,0.2)" stroke-width="0.5"/>
-    </svg>
-    <div class="map-pin" style="left:58%;top:41%" onclick="highlightIngredient('assam')">
-      <div class="pin-ring" style="border-color:#C9A96E"></div>
-      <div class="pin-dot" style="background:#C9A96E;border-color:#C9A96E"></div>
-      <div class="pin-label" style="color:#C9A96E;font-size:8px">Assam</div>
+  <div style="padding:0 22px 48px">
+    <div style="border-left:1px solid rgba(201,169,110,0.15);padding:22px 0 22px 22px;position:relative">
+      <div style="content:'';position:absolute;left:-5px;top:26px;width:9px;height:9px;border-radius:50%;background:var(--ink);border:1px solid var(--gold)"></div>
+      <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:3px">1951</div>
+      <div style="font-family:var(--f-disp);font-size:19px;font-weight:300;color:var(--sand);margin-bottom:6px">The first shop in Ajman</div>
+      <div style="font-size:11px;color:rgba(245,239,230,0.4);line-height:1.8">Haji Ajmal Ali opens a modest attar shop — hand-blending traditional Arabian fragrances for his community.</div>
     </div>
-    <div class="map-pin" style="left:53%;top:37%" onclick="highlightIngredient('taif')">
-      <div class="pin-ring" style="border-color:#B05478"></div>
-      <div class="pin-dot" style="background:#B05478;border-color:#B05478"></div>
-      <div class="pin-label" style="color:#B05478;font-size:8px">Taif</div>
+    <div style="border-left:1px solid rgba(201,169,110,0.15);padding:22px 0 22px 22px;position:relative">
+      <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:3px">1970s</div>
+      <div style="font-family:var(--f-disp);font-size:19px;font-weight:300;color:var(--sand);margin-bottom:6px">The oud expeditions begin</div>
+      <div style="font-size:11px;color:rgba(245,239,230,0.4);line-height:1.8">Ajmal's founders travel to Assam, India — forging direct relationships with oud farmers that define the brand today.</div>
+      <div style="margin-top:12px;background:rgba(201,169,110,0.06);border:0.5px solid rgba(201,169,110,0.15);border-radius:9px;padding:10px 14px;font-size:10px;color:var(--gold-l)"><strong style="font-family:var(--f-disp);font-size:20px;font-weight:300;color:var(--gold);display:block;margin-bottom:1px">40+</strong>Years of direct farmer partnerships</div>
     </div>
-    <div class="map-pin" style="left:44%;top:33%" onclick="highlightIngredient('france')">
-      <div class="pin-ring" style="border-color:#1D9E75"></div>
-      <div class="pin-dot" style="background:#1D9E75;border-color:#1D9E75"></div>
-      <div class="pin-label" style="color:#1D9E75;font-size:8px">Grasse</div>
-    </div>
-    <div class="map-pin" style="left:76%;top:38%" onclick="highlightIngredient('cambodia')">
-      <div class="pin-ring" style="border-color:#5C4A8A"></div>
-      <div class="pin-dot" style="background:#5C4A8A;border-color:#5C4A8A"></div>
-      <div class="pin-label" style="color:#C4B8E8;font-size:8px">Cambodia</div>
-    </div>
-    <div class="map-pin" style="left:51%;top:48%" onclick="highlightIngredient('zanzibar')">
-      <div class="pin-ring" style="border-color:#C9714A"></div>
-      <div class="pin-dot" style="background:#C9714A;border-color:#C9714A"></div>
-      <div class="pin-label" style="color:#C9714A;font-size:8px">Zanzibar</div>
-    </div>
-  </div>
-  <div class="ingredient-cards">
-    <div class="ing-card" onclick="showToast('Origin: Assam, India','Oud — Aquilaria Tree')">
-      <div class="ing-icon">🌳</div>
-      <div class="ing-name">Agarwood Oud</div>
-      <div class="ing-origin">Assam, India · 40yr trees</div>
-      <div class="ing-desc">The rarest resin in perfumery — formed when Aquilaria trees are infected, creating liquid gold worth more than silver.</div>
-      <div class="ing-note-type" style="background:rgba(201,169,110,0.1);color:var(--gold);border:0.5px solid rgba(201,169,110,0.2)">Base note</div>
-    </div>
-    <div class="ing-card" onclick="showToast('Origin: Taif, Saudi Arabia','Rose — Taif Season')">
-      <div class="ing-icon">🌹</div>
-      <div class="ing-name">Taif Rose</div>
-      <div class="ing-origin">Taif, Saudi Arabia · April harvest</div>
-      <div class="ing-desc">Hand-picked at dawn in a 3-week window each April. One gram of oil requires 1,000 flowers.</div>
-      <div class="ing-note-type" style="background:rgba(176,84,120,0.1);color:#D4537E;border:0.5px solid rgba(176,84,120,0.2)">Heart note</div>
-    </div>
-    <div class="ing-card" onclick="showToast('Origin: Grasse, France','Musk — White Atlas')">
-      <div class="ing-icon">❄️</div>
-      <div class="ing-name">White Musk</div>
-      <div class="ing-origin">Grasse, France · Ethical origin</div>
-      <div class="ing-desc">The invisible signature — a clean, airy finish that binds every note and leaves a lingering trail.</div>
-      <div class="ing-note-type" style="background:rgba(29,158,117,0.1);color:#1D9E75;border:0.5px solid rgba(29,158,117,0.2)">Base note</div>
-    </div>
-    <div class="ing-card" onclick="showToast('Origin: Iran / Kashmir','Saffron — Gold Spice')">
-      <div class="ing-icon">✨</div>
-      <div class="ing-name">Saffron</div>
-      <div class="ing-origin">Iran · Kashmiri highlands</div>
-      <div class="ing-desc">World's most expensive spice by weight — adds a warm metallic richness that defines Arabic fragrances.</div>
-      <div class="ing-note-type" style="background:rgba(201,169,110,0.08);color:#BA7517;border:0.5px solid rgba(201,169,110,0.2)">Top note</div>
-    </div>
-    <div class="ing-card" onclick="showToast('Origin: Cambodia','Cambodian Oud — Rarest')">
-      <div class="ing-icon">🪵</div>
-      <div class="ing-name">Cambodian Oud</div>
-      <div class="ing-origin">Cambodia · Wild harvest</div>
-      <div class="ing-desc">Smoother and more honeyed than Indian oud — Cambodia's ancient forests yield a sweeter, lighter resin.</div>
-      <div class="ing-note-type" style="background:rgba(92,74,138,0.1);color:#C4B8E8;border:0.5px solid rgba(92,74,138,0.2)">Base note</div>
-    </div>
-    <div class="ing-card" onclick="showToast('Origin: Zanzibar','Clove — Spice Island')">
-      <div class="ing-icon">🌿</div>
-      <div class="ing-name">Zanzibar Clove</div>
-      <div class="ing-origin">Zanzibar, Tanzania</div>
-      <div class="ing-desc">The original spice island — clove adds a warm woody bite giving oriental fragrances their signature heat.</div>
-      <div class="ing-note-type" style="background:rgba(201,113,74,0.1);color:#C9714A;border:0.5px solid rgba(201,113,74,0.2)">Top note</div>
+    <div style="border-left:1px solid rgba(201,169,110,0.15);padding:22px 0 22px 22px;position:relative">
+      <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:3px">2024 →</div>
+      <div style="font-family:var(--f-disp);font-size:19px;font-weight:300;color:var(--sand);margin-bottom:6px">The AI & AR chapter</div>
+      <div style="font-size:11px;color:rgba(245,239,230,0.4);line-height:1.8">70 years of heritage meets tomorrow's technology — bottles alive in AR, Scent DNA for every customer.</div>
+      <div style="margin-top:12px;background:rgba(201,169,110,0.06);border:0.5px solid rgba(201,169,110,0.15);border-radius:9px;padding:10px 14px;font-size:10px;color:var(--gold-l)"><strong style="font-family:var(--f-disp);font-size:20px;font-weight:300;color:var(--gold);display:block;margin-bottom:1px">50+</strong>Countries, 1 family's vision</div>
     </div>
   </div>
 </div>
 
-<!-- BRAND STORY VIEW -->
-<div id="story-view">
-  <div class="story-hero">
-    <div class="story-bg"></div>
-    <div class="story-year">1951</div>
-    <div class="story-back" onclick="hideStory()">← Back</div>
-    <div class="story-eyebrow">Since 1951 · Dubai, UAE</div>
-    <h2 class="story-title">Seventy years of<br><em>oud, heritage & soul</em></h2>
-    <p class="story-sub">From a single shop in Ajman to 300+ fragrances loved across 50 countries.</p>
-  </div>
-  <div class="story-chapters">
-    <div class="chapter">
-      <div class="ch-year">1951</div>
-      <div class="ch-title">The first shop in Ajman</div>
-      <div class="ch-body">Haji Ajmal Ali opens a modest attar shop in the UAE — hand-blending traditional Arabian fragrances for the local community.</div>
-      <div class="ch-stat"><strong>1</strong> Shop, one family, one obsession</div>
-    </div>
-    <div class="chapter">
-      <div class="ch-year">1970s</div>
-      <div class="ch-title">The oud expeditions begin</div>
-      <div class="ch-body">Ajmal's founders travel personally to Assam, India — forging direct relationships with oud farmers and establishing ethical sourcing practices.</div>
-      <div class="ch-stat"><strong>40+</strong> Years of direct farmer partnerships</div>
-    </div>
-    <div class="chapter">
-      <div class="ch-year">1990s</div>
-      <div class="ch-title">From regional to international</div>
-      <div class="ch-body">Ajmal expands across the GCC, India, and Pakistan. The iconic Dahn Al Oudh range launches and quickly becomes the most gifted fragrance in the Gulf.</div>
-      <div class="ch-stat"><strong>12</strong> Countries entered in a single decade</div>
-    </div>
-    <div class="chapter">
-      <div class="ch-year">2010s</div>
-      <div class="ch-title">300 fragrances and growing</div>
-      <div class="ch-body">In-house perfumers trained in Grasse and carrying ancestral knowledge create a portfolio spanning ancient attars to modern eau de parfums.</div>
-      <div class="ch-stat"><strong>300+</strong> Fragrances crafted in-house</div>
-    </div>
-    <div class="chapter">
-      <div class="ch-year">2024 →</div>
-      <div class="ch-title">The AI & AR chapter</div>
-      <div class="ch-body">Ajmal enters the next era — personalised Scent DNA, bottles alive in augmented reality, 70 years of heritage meets the intelligence of tomorrow.</div>
-      <div class="ch-stat"><strong>50+</strong> Countries, 1 family's vision</div>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
 <div id="toast"><strong id="t-title"></strong><span id="t-msg"></span></div>
 
 <script>
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════
+   REAL AJMAL INDIA BESTSELLERS
+   Shapes based on actual product photos
+═══════════════════════════════════════ */
+var PRODUCTS = [
+  {
+    id: 'aurum',
+    name: 'Aurum',
+    sub: 'Floral · Amber · Warm spices',
+    eyebrow: 'Bestseller · Women\'s Collection',
+    notes: ['Bulgarian Rose','Amber','Vanilla','Musk'],
+    price: '₹2,400',
+    shape: 'aurum',          /* tall faceted square with gold cap */
+    color: { body:'#D4A84B', mid:'#A07820', dark:'#6B4E10', cap:'#E8D5A0', liquid:'rgba(200,140,30,0.28)', shine:'rgba(255,220,100,0.35)' }
+  },
+  {
+    id: 'wisal',
+    name: 'Wisal',
+    sub: 'Soft musk · Vanilla · Jasmine',
+    eyebrow: 'Bestseller · Floral Collection',
+    notes: ['Jasmine','Vanilla','Musk','Sandalwood'],
+    price: '₹2,100',
+    shape: 'wisal',          /* curved silver feminine bottle */
+    color: { body:'#B8C8D8', mid:'#8898A8', dark:'#506070', cap:'#D8E8F0', liquid:'rgba(140,180,200,0.22)', shine:'rgba(220,240,255,0.4)' }
+  },
+  {
+    id: 'dahn',
+    name: 'Dahn Al Oudh Moattaq',
+    sub: 'Pure Hindi oud · Aged · Crystal attar',
+    eyebrow: 'Oud Collection · Heritage Line',
+    notes: ['Agarwood Oud','Ambergris','Musk'],
+    price: '₹3,800',
+    shape: 'dahn',           /* small crystal attar bottle, hexagonal */
+    color: { body:'#7B4A1A', mid:'#4A2808', dark:'#1E0E02', cap:'#C9A96E', liquid:'rgba(80,40,8,0.55)', shine:'rgba(201,169,110,0.4)' }
+  },
+  {
+    id: 'evoke',
+    name: 'Evoke Gold For Him',
+    sub: 'Woody · Fresh · Oud accord',
+    eyebrow: 'Bestseller · Men\'s Collection',
+    notes: ['Oud','Bergamot','Vetiver','Cedar'],
+    price: '₹2,800',
+    shape: 'evoke',          /* tall cylindrical with silver/dark cap */
+    color: { body:'#1A1A2A', mid:'#0A0A18', dark:'#050508', cap:'#C9A96E', liquid:'rgba(30,30,60,0.5)', shine:'rgba(201,169,110,0.3)' }
+  }
+];
+
+/* ═══════════════════════════════════════
    STATE
-═══════════════════════════════════════════ */
-var arMode = null;
-var arStream = null;
-var auraActive = false;
-var bottleActive = false;
-var particleInterval = null;
-var detectedSurface = false;
+═══════════════════════════════════════ */
+var mode = null;
+var stream = null;
 var raf = null;
+var t = 0;
+var curProd = 0;
 
-/* Bottle interaction state */
-var dragActive = false;
-var lastX = 0, lastY = 0;
-var rotX = -0.15, rotY = 0.3;   /* euler angles in radians */
-var targetRotX = -0.15, targetRotY = 0.3;
+/* Bottle placement */
+var bottlePlaced = false;
+var bottleX = 0, bottleY = 0;  /* canvas position */
 var bottleScale = 1;
-var targetScale = 1;
-var pinchDist0 = 0;
-var pinchScale0 = 1;
 
-/* Bottle colour themes */
-var bottleColorIdx = 0;
-var bottleColors = [
-  { primary:'#C9A96E', mid:'#8B6914', dark:'#5A3F08', cap:'#E8D5B0', capShine:'#FFF8E7', label:'Amber Gold',   liquid:'rgba(180,120,30,0.22)',  rim:'rgba(240,220,176,0.6)' },
-  { primary:'#C06080', mid:'#7A2448', dark:'#3E0C22', cap:'#E8B0C8', capShine:'#FFE8F0', label:'Rose Blush',   liquid:'rgba(176,84,120,0.22)', rim:'rgba(232,176,200,0.6)' },
-  { primary:'#7060AA', mid:'#3A2870', dark:'#1A0C40', cap:'#C8B8E8', capShine:'#EEE8FF', label:'Royal Violet', liquid:'rgba(92,74,138,0.22)',  rim:'rgba(200,184,232,0.6)' },
-  { primary:'#259E7A', mid:'#0D5C43', dark:'#062E22', cap:'#A8E8D0', capShine:'#D8FFF0', label:'Teal Musk',    liquid:'rgba(29,158,117,0.22)', rim:'rgba(168,232,208,0.6)' },
-  { primary:'#555555', mid:'#222222', dark:'#080808', cap:'#888888', capShine:'#CCCCCC', label:'Obsidian',     liquid:'rgba(40,40,40,0.35)',   rim:'rgba(140,140,140,0.6)' }
-];
+/* Rotation */
+var rotY = 0.3, targetRotY = 0.3;
+var drag = false, lastDX = 0;
 
-var products = [
-  {name:'Dahn Al Oudh Moattaq',sub:'Deep oud · Amber · Saffron · Long-lasting',eyebrow:'Oud Collection · Top Match 97%',notes:['Oud','Amber','Saffron','Musk'],auraColors:['#C9A96E','#8B6914','#C9714A','#6B3E26']},
-  {name:'Aurum',sub:'Warm floral · Musk · Golden accord',eyebrow:'Floral Collection · Top Match 91%',notes:['Rose','Vanilla','Musk','Amber'],auraColors:['#B05478','#D4537E','#E8D5B0','#6B3E26']},
-  {name:'Mukhallat Malaki',sub:'Royal oud · Saffron · Ceremonial grandeur',eyebrow:'Royal Collection · Top Match 96%',notes:['Oud','Saffron','Rose','Labdanum'],auraColors:['#5C4A8A','#C9A96E','#B05478','#6B3E26']},
-  {name:'Wisal',sub:'Soft musk · Vanilla · Gentle warmth',eyebrow:'Musk Collection · Top Match 93%',notes:['Musk','Vanilla','Jasmine','Sandalwood'],auraColors:['#1D9E75','#E8D5B0','#B05478','#888780']}
-];
-var curProduct = 0;
+/* Aura */
+var auraActive = false;
+var auraParticles = [];
 
-/* ═══════════════════════════════════════════
+/* WebXR */
+var xrSession = null;
+var xrRefSpace = null;
+var xrHitTestSource = null;
+
+/* ═══════════════════════════════════════
    INIT
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 window.addEventListener('load', function(){
-  setTimeout(function(){
-    document.getElementById('loading').classList.add('hide');
-  }, 1800);
+  buildTabs();
+  updatePanel(0);
+  setTimeout(function(){ document.getElementById('loading').classList.add('hide'); }, 1500);
 });
 
-/* ═══════════════════════════════════════════
-   AR LAUNCH
-═══════════════════════════════════════════ */
-function startAR(mode){
-  arMode = mode;
-  detectedSurface = false;
-  rotX = -0.15; rotY = 0.3;
-  targetRotX = -0.15; targetRotY = 0.3;
-  bottleScale = 1; targetScale = 1;
-  document.getElementById('landing').classList.add('hide');
-  document.getElementById('ar-view').classList.add('active');
-  document.getElementById('hud').classList.add('active');
-  document.getElementById('hud-bottom').classList.remove('show');
-  document.getElementById('scan-hint-wrap').classList.remove('hide');
-  document.getElementById('scan-text').textContent = mode === 'aura' ? 'Point at a flat surface' : 'Point at any surface';
-
-  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:false})
-    .then(function(stream){
-      arStream = stream;
-      var vid = document.getElementById('ar-video');
-      vid.srcObject = stream;
-      vid.play();
-      simulateSurfaceDetection();
-    })
-    .catch(function(){ runSimulationMode(mode); });
-}
-
-function simulateSurfaceDetection(){
-  setTimeout(function(){
-    detectedSurface = true;
-    document.getElementById('scan-text').textContent = 'Surface detected ✓';
-    document.getElementById('scan-hint-wrap').classList.add('hide');
-    document.getElementById('hud-bottom').classList.add('show');
-    if(arMode === 'aura') launchAura();
-    else launchBottle();
-  }, 2200);
-}
-
-/* ═══════════════════════════════════════════
-   AURA PARTICLES
-═══════════════════════════════════════════ */
-function launchAura(){
-  auraActive = true;
-  var overlay = document.getElementById('aura-overlay');
-  overlay.classList.add('active');
-  overlay.innerHTML = '';
-  var p = products[curProduct];
-  spawnAuraRings(overlay, p);
-  spawnParticles(overlay, p);
-  showToast('Scent aura activated', p.name);
-}
-
-function spawnAuraRings(overlay, p){
-  var cx = window.innerWidth/2, cy = window.innerHeight * 0.55;
-  [0,600,1200,1800,2400].forEach(function(delay, i){
-    setTimeout(function(){
-      if(!auraActive) return;
-      var ring = document.createElement('div');
-      ring.className = 'aura-ring';
-      var size = 60 + i*20;
-      ring.style.cssText = 'left:'+cx+'px;top:'+cy+'px;width:'+size+'px;height:'+size+'px;border-color:'+p.auraColors[i%p.auraColors.length]+';animation-duration:'+(2.5+i*0.4)+'s;animation-delay:0s';
-      overlay.appendChild(ring);
-      setTimeout(function(){ if(ring.parentNode) ring.parentNode.removeChild(ring); }, 4000);
-      if(auraActive) setTimeout(function(){spawnAuraRings(overlay,p)}, 2500);
-    }, delay);
+function buildTabs(){
+  var tabs = document.getElementById('prod-tabs');
+  tabs.innerHTML = '';
+  PRODUCTS.forEach(function(p, i){
+    var b = document.createElement('button');
+    b.className = 'prod-tab' + (i===0?' act':'');
+    b.textContent = p.name.split(' ')[0] + (p.name.split(' ')[1] ? ' '+p.name.split(' ')[1] : '');
+    b.onclick = (function(idx,el){ return function(){ switchProd(idx,el); }; })(i,b);
+    tabs.appendChild(b);
   });
 }
 
-function spawnParticles(overlay, p){
-  var noteNames = ['oud','rose','amber','musk','saffron','sandalwood','bergamot','cedar'];
-  var cx = window.innerWidth/2, cy = window.innerHeight * 0.6;
-  function spawn(){
-    if(!auraActive) return;
-    var particle = document.createElement('div');
-    particle.className = 'note-particle';
-    var size = 4 + Math.random()*12;
-    var angle = Math.random() * Math.PI * 2;
-    var radius = 40 + Math.random() * 80;
-    var startX = cx + Math.cos(angle)*radius;
-    var startY = cy + Math.sin(angle)*radius*0.5;
-    var tx = (Math.random()-0.5)*200;
-    var ty = -(80 + Math.random()*180);
-    var col = p.auraColors[Math.floor(Math.random()*p.auraColors.length)];
-    var dur = 2.5 + Math.random()*2.5;
-    var op = 0.3 + Math.random()*0.5;
-    particle.style.cssText = 'left:'+startX+'px;top:'+startY+'px;width:'+size+'px;height:'+size+'px;background:'+col+';--tx:'+tx+'px;--ty:'+ty+'px;--op:'+op+';animation-duration:'+dur+'s;animation-delay:0s';
-    if(Math.random() > 0.65){
-      particle.style.background='transparent';particle.style.borderRadius='0';
-      particle.style.fontSize='9px';particle.style.letterSpacing='0.1em';
-      particle.style.textTransform='uppercase';particle.style.color=col;
-      particle.style.fontFamily="'DM Sans',sans-serif";particle.style.whiteSpace='nowrap';
-      particle.textContent=noteNames[Math.floor(Math.random()*noteNames.length)];
-      particle.style.width='auto';particle.style.height='auto';
-    }
-    overlay.appendChild(particle);
-    setTimeout(function(){ if(particle.parentNode) particle.parentNode.removeChild(particle); }, dur*1000+200);
-  }
-  particleInterval = setInterval(spawn, 120);
+function updatePanel(i){
+  var p = PRODUCTS[i];
+  document.getElementById('p-ey').textContent = p.eyebrow;
+  document.getElementById('p-nm').textContent = p.name;
+  document.getElementById('p-sb').textContent = p.sub;
+  document.getElementById('p-notes').innerHTML = p.notes.map(function(n){ return '<span class="pill">'+n+'</span>'; }).join('');
+  document.getElementById('wishlist-btn').onclick = function(){ showToast('Added to wishlist · '+p.price, p.name); };
 }
 
-/* ═══════════════════════════════════════════
-   PREMIUM BOTTLE 3D
-═══════════════════════════════════════════ */
-function launchBottle(){
-  bottleActive = true;
-  var canvas = document.getElementById('bottle-canvas');
+function switchProd(i, el){
+  curProd = i;
+  document.querySelectorAll('.prod-tab').forEach(function(t){ t.classList.remove('act'); });
+  el.classList.add('act');
+  updatePanel(i);
+  bottlePlaced = false; /* reset placement for new bottle */
+  showToast('Swipe to place','Now showing: '+PRODUCTS[i].name.split(' ')[0]);
+}
+
+/* ═══════════════════════════════════════
+   BOTTLE AR MODE
+═══════════════════════════════════════ */
+function startBottleAR(){
+  mode = 'bottle';
+  document.getElementById('landing').classList.add('hide');
+  document.getElementById('hud').classList.add('active');
+  document.getElementById('panel').classList.add('show');
+
+  var canvas = document.getElementById('main-canvas');
   canvas.classList.add('active');
-  canvas.width = window.innerWidth * window.devicePixelRatio;
-  canvas.height = window.innerHeight * window.devicePixelRatio;
+  canvas.width = window.innerWidth * devicePixelRatio;
+  canvas.height = window.innerHeight * devicePixelRatio;
   canvas.style.width = window.innerWidth + 'px';
   canvas.style.height = window.innerHeight + 'px';
 
-  document.getElementById('color-swatches').classList.add('active');
-  document.getElementById('bottle-controls').classList.add('active');
+  /* Check WebXR support */
+  if(navigator.xr){
+    navigator.xr.isSessionSupported('immersive-ar').then(function(supported){
+      if(supported){ document.getElementById('xr-btn').classList.add('show'); }
+    });
+  }
 
-  attachBottleGestures(canvas);
-  startBottleLoop(canvas);
-  showToast('Drag to rotate · Pinch to scale', products[curProduct].name);
+  /* Camera */
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:false})
+    .then(function(s){
+      stream = s;
+      var v = document.getElementById('ar-video');
+      v.srcObject = s; v.play();
+      v.classList.add('active');
+      beginBottleLoop(canvas);
+    })
+    .catch(function(){ beginBottleLoop(canvas); });
+
+  attachGestures(canvas);
+  document.getElementById('place-hint').style.display = 'flex';
+  document.getElementById('place-hint').style.flexDirection = 'column';
+  document.getElementById('place-hint').style.alignItems = 'center';
 }
 
-function attachBottleGestures(canvas){
-  /* Touch drag */
-  canvas.style.pointerEvents = 'auto';
+function attachGestures(canvas){
+  /* TAP to place bottle */
   canvas.addEventListener('touchstart', function(e){
     if(e.touches.length === 1){
-      dragActive = true;
-      lastX = e.touches[0].clientX;
-      lastY = e.touches[0].clientY;
-    } else if(e.touches.length === 2){
-      dragActive = false;
-      pinchDist0 = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      pinchScale0 = targetScale;
+      if(!bottlePlaced){
+        /* Place bottle at tap point */
+        bottleX = e.touches[0].clientX * devicePixelRatio;
+        bottleY = e.touches[0].clientY * devicePixelRatio;
+        bottlePlaced = true;
+        document.getElementById('place-hint').classList.add('hide');
+        document.getElementById('drag-hint').classList.add('show');
+        setTimeout(function(){ document.getElementById('drag-hint').classList.remove('show'); }, 3000);
+        showToast('Bottle placed · Drag to rotate', PRODUCTS[curProd].name);
+      } else {
+        drag = true;
+        lastDX = e.touches[0].clientX;
+      }
     }
     e.preventDefault();
   }, {passive:false});
 
   canvas.addEventListener('touchmove', function(e){
-    if(e.touches.length === 1 && dragActive){
-      var dx = e.touches[0].clientX - lastX;
-      var dy = e.touches[0].clientY - lastY;
-      lastX = e.touches[0].clientX;
-      lastY = e.touches[0].clientY;
-      targetRotY += dx * 0.012;
-      targetRotX += dy * 0.008;
-      targetRotX = Math.max(-0.9, Math.min(0.9, targetRotX));
-    } else if(e.touches.length === 2){
-      var d = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      targetScale = Math.max(0.5, Math.min(2.0, pinchScale0 * (d / pinchDist0)));
+    if(drag && e.touches.length === 1){
+      var dx = e.touches[0].clientX - lastDX;
+      lastDX = e.touches[0].clientX;
+      targetRotY += dx * 0.018;
     }
     e.preventDefault();
   }, {passive:false});
+  canvas.addEventListener('touchend', function(){ drag = false; });
 
-  canvas.addEventListener('touchend', function(){ dragActive = false; });
-
-  /* Mouse drag (desktop preview) */
+  /* Mouse fallback */
   canvas.addEventListener('mousedown', function(e){
-    dragActive = true; lastX = e.clientX; lastY = e.clientY;
+    if(!bottlePlaced){
+      bottleX = e.clientX * devicePixelRatio;
+      bottleY = e.clientY * devicePixelRatio;
+      bottlePlaced = true;
+      document.getElementById('place-hint').classList.add('hide');
+      document.getElementById('drag-hint').classList.add('show');
+      setTimeout(function(){ document.getElementById('drag-hint').classList.remove('show'); }, 3000);
+      showToast('Bottle placed · Drag to rotate', PRODUCTS[curProd].name);
+    } else { drag = true; lastDX = e.clientX; }
   });
   window.addEventListener('mousemove', function(e){
-    if(!dragActive) return;
-    var dx = e.clientX - lastX; var dy = e.clientY - lastY;
-    lastX = e.clientX; lastY = e.clientY;
-    targetRotY += dx * 0.01; targetRotX += dy * 0.006;
-    targetRotX = Math.max(-0.9, Math.min(0.9, targetRotX));
+    if(!drag) return;
+    targetRotY += (e.clientX - lastDX) * 0.012;
+    lastDX = e.clientX;
   });
-  window.addEventListener('mouseup', function(){ dragActive = false; });
-  canvas.addEventListener('wheel', function(e){
-    targetScale = Math.max(0.5, Math.min(2.0, targetScale - e.deltaY * 0.001));
-    e.preventDefault();
-  }, {passive:false});
+  window.addEventListener('mouseup', function(){ drag = false; });
 }
 
-function startBottleLoop(canvas){
+function beginBottleLoop(canvas){
   var ctx = canvas.getContext('2d');
-  var dpr = window.devicePixelRatio || 1;
-  var t = 0;
+  var dpr = devicePixelRatio;
+  t = 0;
 
   function frame(){
-    if(!bottleActive){ ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+    if(mode !== 'bottle'){ return; }
     t += 0.016;
-
-    /* Smooth interpolation */
-    rotX += (targetRotX - rotX) * 0.1;
-    rotY += (targetRotY - rotY) * 0.1;
-    bottleScale += (targetScale - bottleScale) * 0.1;
-
-    /* Auto-spin when not dragging */
-    if(!dragActive){ targetRotY += 0.004; }
+    rotY += (targetRotY - rotY) * 0.09;
+    if(!drag){ targetRotY += 0.005; } /* slow auto-spin */
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    var cx = canvas.width / 2;
-    var cy = canvas.height * 0.46;
-    var sc = bottleScale * dpr * Math.min(canvas.width, canvas.height) / 480;
+    if(bottlePlaced){
+      var bx = bottleX;
+      var by = bottleY;
 
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.scale(sc, sc);
+      /* Perspective: bottle sits ON the floor — shadow ellipse below tap point */
+      ctx.save();
+      ctx.translate(bx, by);
+      drawFloorGrid(ctx, rotY);
+      drawShadow(ctx, dpr);
+      drawBottle(ctx, PRODUCTS[curProd], rotY, t, dpr);
+      ctx.restore();
+    }
 
-    drawPremiumBottle(ctx, t, rotX, rotY);
-
-    ctx.restore();
     raf = requestAnimationFrame(frame);
   }
   raf = requestAnimationFrame(frame);
 }
 
-/* ─────────────────────────────────────────
-   PREMIUM BOTTLE RENDERER
-   Uses rotX/rotY to simulate 3D perspective
-───────────────────────────────────────── */
-function drawPremiumBottle(ctx, t, rx, ry){
-  var theme = bottleColors[bottleColorIdx];
-  var bob = Math.sin(t * 1.1) * 5;
-
-  /* Perspective factor from rotation */
-  var perspX = Math.sin(ry);   /* -1..1 left/right lean */
-  var perspY = Math.sin(rx);   /* -1..1 top/bottom lean */
-  var depth  = Math.cos(ry);   /* depth scale 0..1 */
-
-  /* ── AR FLOOR GRID ── */
+/* ─────────────────────────────────────
+   FLOOR GRID (AR ground plane feel)
+───────────────────────────────────── */
+function drawFloorGrid(ctx, ry){
   ctx.save();
-  ctx.translate(0, 145 + bob);
-  ctx.scale(1, 0.28);
-  var gridAlpha = 0.08 + depth * 0.06;
-  ctx.strokeStyle = 'rgba(201,169,110,' + gridAlpha + ')';
-  ctx.lineWidth = 0.5;
-  for(var gi = -8; gi <= 8; gi++){
-    ctx.beginPath(); ctx.moveTo(gi*22, -200); ctx.lineTo(gi*22, 200); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(-200, gi*22); ctx.lineTo(200, gi*22); ctx.stroke();
-  }
-  /* Grid glow dot in centre */
-  var gridGlow = ctx.createRadialGradient(0,0,0,0,0,80);
-  gridGlow.addColorStop(0, 'rgba(201,169,110,0.10)');
-  gridGlow.addColorStop(1, 'rgba(201,169,110,0)');
-  ctx.fillStyle = gridGlow;
-  ctx.fillRect(-200,-200,400,400);
-  ctx.restore();
-
-  /* ── GROUND SHADOW ── */
-  ctx.save();
-  ctx.translate(perspX * 14, 145 + bob);
+  /* perspective squish */
   ctx.scale(1, 0.22);
-  var shadowGrad = ctx.createRadialGradient(0,0,0,0,0,70);
-  shadowGrad.addColorStop(0,'rgba(0,0,0,0.55)');
-  shadowGrad.addColorStop(0.5,'rgba(0,0,0,0.2)');
-  shadowGrad.addColorStop(1,'rgba(0,0,0,0)');
-  ctx.fillStyle = shadowGrad;
-  ctx.beginPath(); ctx.ellipse(0,0,70,60,0,0,Math.PI*2); ctx.fill();
+  var alpha = 0.07 + Math.abs(Math.cos(ry)) * 0.06;
+  ctx.strokeStyle = 'rgba(201,169,110,' + alpha + ')';
+  ctx.lineWidth = 0.8;
+  for(var i=-8; i<=8; i++){
+    ctx.beginPath(); ctx.moveTo(i*28,-250); ctx.lineTo(i*28,250); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-250,i*28); ctx.lineTo(250,i*28); ctx.stroke();
+  }
+  /* centre glow */
+  var g = ctx.createRadialGradient(0,0,0,0,0,120);
+  g.addColorStop(0,'rgba(201,169,110,0.12)'); g.addColorStop(1,'rgba(201,169,110,0)');
+  ctx.fillStyle = g; ctx.fillRect(-250,-250,500,500);
+  ctx.restore();
+}
+
+/* Shadow on floor */
+function drawShadow(ctx, dpr){
+  ctx.save();
+  ctx.scale(1, 0.20);
+  var sg = ctx.createRadialGradient(0,0,0,0,0,80*dpr*0.5);
+  sg.addColorStop(0,'rgba(0,0,0,0.5)'); sg.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = sg;
+  ctx.beginPath(); ctx.ellipse(0,0,80*dpr*0.5,65*dpr*0.5,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+/* ─────────────────────────────────────
+   MAIN BOTTLE DISPATCHER
+───────────────────────────────────── */
+function drawBottle(ctx, prod, ry, t, dpr){
+  var sc = dpr * Math.min(window.innerWidth, window.innerHeight) / 520;
+  ctx.save();
+  ctx.scale(sc, sc);
+
+  /* Bob animation — bottle floats slightly above floor */
+  var bob = Math.sin(t * 1.0) * 3;
+  ctx.translate(0, -20 + bob);
+
+  var perspX = Math.sin(ry);
+  var depth   = Math.cos(ry);
+
+  switch(prod.shape){
+    case 'aurum':    drawAurum(ctx, prod.color, perspX, depth, t); break;
+    case 'wisal':    drawWisal(ctx, prod.color, perspX, depth, t); break;
+    case 'dahn':     drawDahn(ctx, prod.color, perspX, depth, t);  break;
+    case 'evoke':    drawEvoke(ctx, prod.color, perspX, depth, t); break;
+    default:         drawAurum(ctx, prod.color, perspX, depth, t);
+  }
+  ctx.restore();
+}
+
+/* ═══════════════════════════════════════
+   BOTTLE: AURUM
+   Real shape: tall, gently tapered square
+   body with strong faceted shoulders,
+   wide gold cap with flat top.
+═══════════════════════════════════════ */
+function drawAurum(ctx, c, px, depth, t){
+  var bW = 52 * (0.7 + depth*0.3);  /* compress with rotation */
+  var bH = 200;
+  var sk = px * 16;
+
+  ctx.save();
+  ctx.transform(1, 0, sk/bH, 1, 0, 0);
+
+  /* BODY */
+  var bg = ctx.createLinearGradient(-bW, -bH/2, bW, bH/2);
+  bg.addColorStop(0,   lighten(c.body,55));
+  bg.addColorStop(0.15, lighten(c.body,20));
+  bg.addColorStop(0.5, c.body);
+  bg.addColorStop(0.8, c.mid);
+  bg.addColorStop(1,   c.dark);
+
+  ctx.beginPath(); rrect(ctx, -bW, -bH/2, bW*2, bH, 10);
+  ctx.fillStyle = bg; ctx.fill();
+
+  /* FACETS — Aurum's signature diagonal cut lines */
+  for(var fi=0; fi<5; fi++){
+    var fy = -bH/2 + bH * (0.15 + fi*0.16);
+    ctx.beginPath(); ctx.moveTo(-bW+2, fy); ctx.lineTo(bW-2, fy+8);
+    ctx.strokeStyle = 'rgba(255,255,220,' + (0.06 + fi*0.01) + ')';
+    ctx.lineWidth = 0.8; ctx.stroke();
+  }
+
+  /* Glass liquid */
+  liquidFill(ctx, 0, bH*0.14, bW*0.88, bH*0.72, 8, c.liquid);
+
+  /* Left shine */
+  var ls = ctx.createLinearGradient(-bW,-bH/2, -bW*0.1,-bH/2);
+  ls.addColorStop(0,'rgba(255,255,255,0.38)'); ls.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.beginPath(); rrect(ctx,-bW,-bH/2,bW*0.6,bH,10); ctx.fillStyle=ls; ctx.fill();
+
+  /* Right dark */
+  var rd = ctx.createLinearGradient(bW*0.3,-bH/2,bW,-bH/2);
+  rd.addColorStop(0,'rgba(0,0,0,0)'); rd.addColorStop(1,'rgba(0,0,0,0.3)');
+  ctx.beginPath(); rrect(ctx,bW*0.3-bW,-bH/2,bW*1.7,bH,10); ctx.fillStyle=rd; ctx.fill();
+
+  /* Specular */
+  specularHit(ctx, -bW*0.5+px*bW*0.3, -bH*0.3, bW*0.7);
+
+  /* Border */
+  ctx.beginPath(); rrect(ctx,-bW,-bH/2,bW*2,bH,10);
+  ctx.strokeStyle='rgba(255,220,100,0.5)'; ctx.lineWidth=1; ctx.stroke();
+
+  /* SHOULDER RIDGES (Aurum's faceted top) */
+  ctx.beginPath();
+  ctx.moveTo(-bW, -bH/2+28); ctx.lineTo(-bW*0.7,-bH/2);
+  ctx.lineTo(bW*0.7,-bH/2); ctx.lineTo(bW,-bH/2+28); ctx.closePath();
+  ctx.fillStyle = lighten(c.body,35); ctx.fill();
+  ctx.strokeStyle='rgba(255,220,100,0.4)'; ctx.lineWidth=0.7; ctx.stroke();
+
+  /* NECK */
+  neckDraw(ctx, bW*0.28, 32, -bH/2, c.body, c.mid, 'rgba(255,220,100,0.45)');
+
+  /* CAP — Aurum: wide flat gold cap */
+  var capW = bW*0.52, capH = 46, capY = -bH/2-32-capH+2;
+  capDraw(ctx, capW, capH, capY, c.cap, 'rgba(255,220,100,0.5)', true);
+
+  /* LABEL */
+  labelDraw(ctx, 0, bH*0.07, bW*0.78, 90, c.body, 'AJMAL', 'Aurum', 'EAU DE PARFUM · 75ml');
+
   ctx.restore();
 
+  /* Mist spray */
+  mistSpray(ctx, 0, -bH/2-32-46-2, t, 'rgba(220,200,100,0.5)');
+}
+
+/* ═══════════════════════════════════════
+   BOTTLE: WISAL
+   Real shape: curvaceous bottle — wider
+   at shoulder, narrowing at waist, flares
+   slightly at base. Silver/white with
+   a tall curved pink-silver cap.
+═══════════════════════════════════════ */
+function drawWisal(ctx, c, px, depth, t){
+  var bH = 190;
+  var bW = 48 * (0.7 + depth*0.3);
+  var sk = px * 14;
+
   ctx.save();
-  ctx.translate(perspX * 8, bob);
+  ctx.transform(1, 0, sk/bH, 1, 0, 0);
 
-  /* ══════════════════════════════
-     BOTTLE BODY — skewed by rotY
-  ══════════════════════════════ */
-  var w = 90;          /* half-width */
-  var h = 210;         /* height */
-  var skewX = perspX * 18;  /* horizontal skew for 3D feel */
-  var scaleX = 0.78 + depth * 0.22;  /* compress width as it rotates */
-  var bW = w * scaleX;
+  /* Curvaceous body using bezier */
+  ctx.beginPath();
+  /* right edge: shoulder flare → waist → base */
+  ctx.moveTo(0, -bH/2);
+  ctx.bezierCurveTo(bW*1.1, -bH/2+20, bW*0.95, -bH/2+80, bW*0.75, -bH/2+120);
+  ctx.bezierCurveTo(bW*0.6, -bH/2+155, bW*0.85, -bH/2+175, bW*0.9, bH/2);
+  ctx.lineTo(-bW*0.9, bH/2);
+  ctx.bezierCurveTo(-bW*0.85,-bH/2+175,-bW*0.6,-bH/2+155,-bW*0.75,-bH/2+120);
+  ctx.bezierCurveTo(-bW*0.95,-bH/2+80,-bW*1.1,-bH/2+20,0,-bH/2);
+  ctx.closePath();
 
-  /* Body base gradient */
-  var bodyGrad = ctx.createLinearGradient(-bW, -h*0.5, bW, h*0.5);
-  bodyGrad.addColorStop(0,   lighten(theme.primary, 60));
-  bodyGrad.addColorStop(0.18, lighten(theme.primary, 25));
-  bodyGrad.addColorStop(0.45, theme.primary);
-  bodyGrad.addColorStop(0.72, theme.mid);
-  bodyGrad.addColorStop(1,   theme.dark);
-  
+  var bg = ctx.createLinearGradient(-bW,-bH/2,bW,bH/2);
+  bg.addColorStop(0, lighten(c.body,50));
+  bg.addColorStop(0.3, c.body);
+  bg.addColorStop(0.7, c.mid);
+  bg.addColorStop(1, c.dark);
+  ctx.fillStyle=bg; ctx.fill();
+
+  /* Liquid */
+  ctx.save(); ctx.clip();
+  ctx.fillStyle = c.liquid;
+  ctx.fillRect(-bW*1.1, -bH/2+bH*0.2, bW*2.2, bH);
+  ctx.restore();
+
+  /* Shine */
   ctx.save();
-  ctx.transform(1, 0, skewX/h, 1, 0, 0);
-
-  /* Body shape */
-  ctx.beginPath();
-  bottleBodyPath(ctx, 0, 0, bW, h, 20);
-  ctx.fillStyle = bodyGrad;
-  ctx.fill();
-
-  /* ── GLASS REFRACTION — inner bright column ── */
-  var innerW = bW * 0.28;
-  var refrGrad = ctx.createLinearGradient(-innerW, -h*0.5, innerW, h*0.5);
-  refrGrad.addColorStop(0, 'rgba(255,255,255,0.18)');
-  refrGrad.addColorStop(0.3,'rgba(255,255,255,0.06)');
-  refrGrad.addColorStop(0.7,'rgba(255,255,255,0.02)');
-  refrGrad.addColorStop(1,  'rgba(255,255,255,0)');
-  ctx.beginPath();
-  bottleBodyPath(ctx, -bW*0.5 + innerW*0.5, 0, innerW, h*0.96, 14);
-  ctx.fillStyle = refrGrad;
-  ctx.fill();
-
-  /* ── LIQUID inside glass ── */
-  ctx.save();
-  ctx.beginPath();
-  bottleBodyPath(ctx, 0, 0, bW - 6, h - 6, 16);
+  ctx.moveTo(0,-bH/2);
+  ctx.bezierCurveTo(bW*1.1,-bH/2+20,bW*0.95,-bH/2+80,bW*0.75,-bH/2+120);
+  ctx.bezierCurveTo(bW*0.6,-bH/2+155,bW*0.85,-bH/2+175,bW*0.9,bH/2);
+  ctx.lineTo(-bW*0.9,bH/2);
+  ctx.bezierCurveTo(-bW*0.85,-bH/2+175,-bW*0.6,-bH/2+155,-bW*0.75,-bH/2+120);
+  ctx.bezierCurveTo(-bW*0.95,-bH/2+80,-bW*1.1,-bH/2+20,0,-bH/2);
   ctx.clip();
-  var liquidTop = h * 0.15;
-  var liquidGrad = ctx.createLinearGradient(0, liquidTop - h*0.5, 0, h*0.5);
-  liquidGrad.addColorStop(0, theme.liquid);
-  liquidGrad.addColorStop(0.4, theme.liquid.replace('0.22','0.32'));
-  liquidGrad.addColorStop(1, theme.liquid.replace('0.22','0.44'));
-  ctx.fillStyle = liquidGrad;
-  ctx.fillRect(-bW, liquidTop - h*0.5, bW*2, h);
-  /* liquid meniscus */
-  ctx.beginPath();
-  ctx.ellipse(0, liquidTop - h*0.5, bW - 10, 8, 0, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(255,255,255,0.07)';
-  ctx.fill();
+  var sl = ctx.createLinearGradient(-bW,0,-bW*0.1,0);
+  sl.addColorStop(0,'rgba(255,255,255,0.42)'); sl.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=sl; ctx.fillRect(-bW*1.2,-bH*0.6,bW,bH*1.2);
   ctx.restore();
 
-  /* ── LEFT EDGE SHINE (primary highlight) ── */
-  var shineGrad = ctx.createLinearGradient(-bW, 0, -bW*0.4, 0);
-  shineGrad.addColorStop(0,'rgba(255,255,255,0.32)');
-  shineGrad.addColorStop(0.4,'rgba(255,255,255,0.10)');
-  shineGrad.addColorStop(1,'rgba(255,255,255,0)');
-  ctx.beginPath();
-  bottleBodyPath(ctx, -bW*0.22, 0, bW*0.55, h*0.97, 16);
-  ctx.fillStyle = shineGrad;
-  ctx.fill();
+  specularHit(ctx, -bW*0.4+px*bW*0.25, -bH*0.25, bW*0.65);
 
-  /* ── RIGHT EDGE DARK RIM ── */
-  var rimGrad = ctx.createLinearGradient(bW*0.4, 0, bW, 0);
-  rimGrad.addColorStop(0,'rgba(0,0,0,0)');
-  rimGrad.addColorStop(0.6,'rgba(0,0,0,0.12)');
-  rimGrad.addColorStop(1,'rgba(0,0,0,0.35)');
   ctx.beginPath();
-  bottleBodyPath(ctx, bW*0.18, 0, bW*0.82, h*0.97, 16);
-  ctx.fillStyle = rimGrad;
-  ctx.fill();
+  ctx.moveTo(0,-bH/2);
+  ctx.bezierCurveTo(bW*1.1,-bH/2+20,bW*0.95,-bH/2+80,bW*0.75,-bH/2+120);
+  ctx.bezierCurveTo(bW*0.6,-bH/2+155,bW*0.85,-bH/2+175,bW*0.9,bH/2);
+  ctx.lineTo(-bW*0.9,bH/2);
+  ctx.bezierCurveTo(-bW*0.85,-bH/2+175,-bW*0.6,-bH/2+155,-bW*0.75,-bH/2+120);
+  ctx.bezierCurveTo(-bW*0.95,-bH/2+80,-bW*1.1,-bH/2+20,0,-bH/2);
+  ctx.strokeStyle='rgba(200,220,240,0.55)'; ctx.lineWidth=1; ctx.stroke();
 
-  /* ── CAUSTIC DOTS (light refraction) ── */
-  var numCaustics = 6;
-  for(var ci=0; ci<numCaustics; ci++){
-    var cAngle = t*0.7 + ci*(Math.PI*2/numCaustics);
-    var cR = bW * (0.2 + 0.15*Math.sin(t*0.4 + ci));
-    var cX = -bW*0.15 + Math.cos(cAngle)*cR * 0.5;
-    var cY = -h*0.1 + Math.sin(cAngle)*h*0.25;
-    var cSize = 3 + 2*Math.sin(t + ci*1.3);
-    var causticGrad = ctx.createRadialGradient(cX,cY,0,cX,cY,cSize*2);
-    causticGrad.addColorStop(0,'rgba(255,255,220,0.22)');
-    causticGrad.addColorStop(1,'rgba(255,255,220,0)');
+  /* Neck — slim */
+  neckDraw(ctx, bW*0.22, 28, -bH/2, c.body, c.mid, 'rgba(200,220,240,0.4)');
+
+  /* Cap — tall curved silver cap */
+  var capW=bW*0.38, capH=55, capY=-bH/2-28-capH+2;
+  capDraw(ctx, capW, capH, capY, c.cap, 'rgba(180,210,230,0.5)', false);
+
+  labelDraw(ctx, 0, bH*0.05, bW*0.72, 80, c.body, 'AJMAL', 'Wisal', 'EAU DE PARFUM · 50ml');
+
+  ctx.restore();
+  mistSpray(ctx, 0, -bH/2-28-55-2, t, 'rgba(200,220,240,0.55)');
+}
+
+/* ═══════════════════════════════════════
+   BOTTLE: DAHN AL OUDH MOATTAQ
+   Real shape: Small crystal hexagonal
+   attar bottle with rollette / dropper cap.
+   Compact, heavy-looking, ornate.
+═══════════════════════════════════════ */
+function drawDahn(ctx, c, px, depth, t){
+  /* Attar bottle: compact & squat */
+  var bH = 130;
+  var bW = 44 * (0.7 + depth*0.3);
+  var sk = px * 10;
+  var sides = 6; /* hexagonal */
+
+  ctx.save();
+  ctx.transform(1,0,sk/bH,1,0,0);
+
+  /* Hexagonal body (simulated with many-sided polygon) */
+  ctx.beginPath();
+  var polyPts = hexPath(0, bH*0.1, bW, bH*0.9);
+  for(var pi=0; pi<polyPts.length; pi++){
+    if(pi===0) ctx.moveTo(polyPts[pi][0], polyPts[pi][1]);
+    else ctx.lineTo(polyPts[pi][0], polyPts[pi][1]);
+  }
+  ctx.closePath();
+
+  var bg = ctx.createRadialGradient(-bW*0.3,-bH*0.1,0,0,0,bW*1.4);
+  bg.addColorStop(0,   lighten(c.body,70));
+  bg.addColorStop(0.3, lighten(c.body,30));
+  bg.addColorStop(0.7, c.body);
+  bg.addColorStop(1,   c.dark);
+  ctx.fillStyle=bg; ctx.fill();
+
+  /* Crystal facet highlights */
+  for(var ci=0; ci<6; ci++){
+    var angle1 = (ci/6)*Math.PI*2 - Math.PI/2;
+    var angle2 = ((ci+1)/6)*Math.PI*2 - Math.PI/2;
     ctx.beginPath();
-    ctx.arc(cX, cY, cSize*2, 0, Math.PI*2);
-    ctx.fillStyle = causticGrad;
+    ctx.moveTo(0, bH*0.1);
+    ctx.lineTo(Math.cos(angle1)*bW, bH*0.1 + Math.sin(angle1)*bH*0.5);
+    ctx.lineTo(Math.cos(angle2)*bW, bH*0.1 + Math.sin(angle2)*bH*0.5);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,255,255,' + (0.04 + 0.06*(ci%2)) + ')';
     ctx.fill();
+    ctx.strokeStyle = 'rgba(201,169,110,0.25)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
   }
 
-  /* ── SPECULAR HIGHLIGHT (top-left glint) ── */
-  var specX = -bW*0.55 + perspX*bW*0.2;
-  var specY = -h*0.35 + perspY*20;
-  var specGrad = ctx.createRadialGradient(specX, specY, 0, specX, specY, bW*0.5);
-  specGrad.addColorStop(0,'rgba(255,255,255,0.55)');
-  specGrad.addColorStop(0.2,'rgba(255,255,255,0.15)');
-  specGrad.addColorStop(0.5,'rgba(255,255,255,0.04)');
-  specGrad.addColorStop(1,'rgba(255,255,255,0)');
-  ctx.beginPath();
-  bottleBodyPath(ctx, 0, 0, bW, h, 20);
-  ctx.fillStyle = specGrad;
-  ctx.fill();
-
-  /* ── BOTTLE BORDER ── */
-  ctx.beginPath();
-  bottleBodyPath(ctx, 0, 0, bW, h, 20);
-  ctx.strokeStyle = theme.rim;
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  ctx.restore(); /* unskew */
-
-  /* ── LABEL AREA ── */
+  /* Deep dark liquid (it's pure oud oil) */
   ctx.save();
-  ctx.transform(1, 0, skewX/h, 1, 0, 0);
-  var labelW = bW * scaleX * 0.75;
-  var labelH = h * 0.38;
-  var labelY = -h * 0.02;
   ctx.beginPath();
-  roundedRect(ctx, -labelW/2, labelY - labelH/2, labelW, labelH, 8);
-  ctx.fillStyle = 'rgba(255,255,255,0.06)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
-  ctx.lineWidth = 0.5;
-  ctx.stroke();
-
-  /* Label decorative line */
-  ctx.strokeStyle = 'rgba(201,169,110,0.3)';
-  ctx.lineWidth = 0.4;
-  ctx.beginPath(); ctx.moveTo(-labelW*0.38, labelY - labelH*0.32); ctx.lineTo(labelW*0.38, labelY - labelH*0.32); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(-labelW*0.38, labelY + labelH*0.32); ctx.lineTo(labelW*0.38, labelY + labelH*0.32); ctx.stroke();
-
-  /* Label brand name */
-  ctx.fillStyle = 'rgba(245,239,230,0.9)';
-  ctx.font = '300 11px "Cormorant Garamond",serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('A  J  M  A  L', 0, labelY - 18);
-
-  ctx.fillStyle = theme.primary;
-  ctx.font = 'italic 300 8.5px "Cormorant Garamond",serif';
-  var pName = products[curProduct].name;
-  var shortName = pName.length > 14 ? pName.split(' ').slice(0,2).join(' ') : pName;
-  ctx.fillText(shortName, 0, labelY - 4);
-
-  ctx.fillStyle = 'rgba(245,239,230,0.25)';
-  ctx.font = '300 6px "DM Sans",sans-serif';
-  ctx.fillText('EAU DE PARFUM · 100ml', 0, labelY + 14);
-
-  /* Fragrance mark — small floral ornament */
-  ctx.fillStyle = 'rgba(201,169,110,0.4)';
-  ctx.font = '11px serif';
-  ctx.fillText('✦', 0, labelY + 28);
-
+  for(var pi=0; pi<polyPts.length; pi++){
+    if(pi===0) ctx.moveTo(polyPts[pi][0], polyPts[pi][1]);
+    else ctx.lineTo(polyPts[pi][0], polyPts[pi][1]);
+  }
+  ctx.clip();
+  ctx.fillStyle = c.liquid;
+  ctx.fillRect(-bW, bH*0.1-bH*0.2, bW*2, bH);
+  /* Oud oil surface shimmer */
+  var shimmer = ctx.createLinearGradient(-bW, bH*0.1-bH*0.2, bW, bH*0.1-bH*0.2);
+  shimmer.addColorStop(0,'rgba(201,169,110,0.15)'); shimmer.addColorStop(0.5,'rgba(201,169,110,0.35)'); shimmer.addColorStop(1,'rgba(201,169,110,0.1)');
+  ctx.fillStyle = shimmer; ctx.fillRect(-bW, bH*0.1-bH*0.2, bW*2, 6);
   ctx.restore();
 
-  /* ══════════════════════════════
-     NECK
-  ══════════════════════════════ */
-  ctx.save();
-  ctx.transform(1, 0, skewX/h, 1, 0, 0);
-  var neckW = bW * scaleX * 0.32;
-  var neckH = 42;
-  var neckY = -h/2 - neckH/2;
+  specularHit(ctx, -bW*0.45+px*bW*0.2, -bH*0.2, bW*0.7);
 
-  var neckGrad = ctx.createLinearGradient(-neckW, neckY, neckW, neckY+neckH);
-  neckGrad.addColorStop(0, lighten(theme.primary, 50));
-  neckGrad.addColorStop(0.5, theme.primary);
-  neckGrad.addColorStop(1, theme.mid);
-  ctx.beginPath();
-  ctx.moveTo(-neckW * 0.7, neckY);
-  ctx.bezierCurveTo(-neckW*0.75, neckY+neckH*0.4, -neckW, neckY+neckH*0.7, -neckW, neckY+neckH);
-  ctx.lineTo(neckW, neckY+neckH);
-  ctx.bezierCurveTo(neckW, neckY+neckH*0.7, neckW*0.75, neckY+neckH*0.4, neckW*0.7, neckY);
-  ctx.closePath();
-  ctx.fillStyle = neckGrad;
-  ctx.fill();
-
-  /* neck shine */
-  var nShine = ctx.createLinearGradient(-neckW, 0, neckW*0.1, 0);
-  nShine.addColorStop(0,'rgba(255,255,255,0.28)');
-  nShine.addColorStop(1,'rgba(255,255,255,0)');
-  ctx.fillStyle = nShine;
-  ctx.fill();
-  ctx.strokeStyle = theme.rim;
-  ctx.lineWidth = 0.7;
-  ctx.stroke();
-
-  /* neck ring band */
-  ctx.beginPath();
-  ctx.fillStyle = 'rgba(201,169,110,0.5)';
-  roundedRect(ctx, -neckW*0.9, neckY + neckH - 7, neckW*1.8, 5, 2);
-  ctx.fill();
-
-  ctx.restore();
-
-  /* ══════════════════════════════
-     CAP / ATOMISER
-  ══════════════════════════════ */
-  ctx.save();
-  ctx.transform(1, 0, skewX/h, 1, 0, 0);
-  var capW = bW * scaleX * 0.4;
-  var capH = 52;
-  var capY = -h/2 - neckH - capH + 2;
-
-  /* Cap body */
-  var capGrad = ctx.createLinearGradient(-capW, capY, capW, capY + capH);
-  capGrad.addColorStop(0,   lighten(theme.cap.replace('#',''), 40));
-  capGrad.addColorStop(0.3, theme.cap);
-  capGrad.addColorStop(0.8, darkenHex(theme.cap, 30));
-  capGrad.addColorStop(1,   darkenHex(theme.cap, 55));
-  ctx.beginPath();
-  roundedRect(ctx, -capW, capY, capW*2, capH, 8);
-  ctx.fillStyle = capGrad;
-  ctx.fill();
-
-  /* Cap shine stripe */
-  var capShineGrad = ctx.createLinearGradient(-capW, capY, -capW*0.1, capY+capH);
-  capShineGrad.addColorStop(0, 'rgba(255,255,255,0.45)');
-  capShineGrad.addColorStop(0.5,'rgba(255,255,255,0.10)');
-  capShineGrad.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.beginPath();
-  roundedRect(ctx, -capW, capY, capW*0.7, capH, 8);
-  ctx.fillStyle = capShineGrad;
-  ctx.fill();
-
-  /* Cap horizontal engraving lines */
-  ctx.strokeStyle = 'rgba(0,0,0,0.12)';
-  ctx.lineWidth = 0.6;
-  for(var li=0; li<4; li++){
-    var ly = capY + capH*(0.25 + li*0.17);
-    ctx.beginPath(); ctx.moveTo(-capW+4, ly); ctx.lineTo(capW-4, ly); ctx.stroke();
+  /* Gold rim lines */
+  for(var ri=0; ri<3; ri++){
+    var ry2 = -bH/2 + 8 + ri*14;
+    ctx.beginPath(); ctx.moveTo(-bW*0.85, ry2+bH*0.6); ctx.lineTo(bW*0.85, ry2+bH*0.6);
+    ctx.strokeStyle='rgba(201,169,110,0.3)'; ctx.lineWidth=0.6; ctx.stroke();
   }
 
-  /* Gold band at cap base */
-  ctx.beginPath();
-  roundedRect(ctx, -capW*1.05, capY+capH-8, capW*2.1, 10, 4);
-  var bandGrad = ctx.createLinearGradient(-capW,0,capW,0);
-  bandGrad.addColorStop(0,'#8B6914'); bandGrad.addColorStop(0.3,'#E8D5B0'); bandGrad.addColorStop(0.7,'#C9A96E'); bandGrad.addColorStop(1,'#8B6914');
-  ctx.fillStyle = bandGrad;
-  ctx.fill();
+  /* Neck — short */
+  neckDraw(ctx, bW*0.2, 20, -bH*0.4, c.cap, c.body, 'rgba(201,169,110,0.5)');
 
-  /* Cap specular */
-  var capSpec = ctx.createRadialGradient(-capW*0.4, capY+capH*0.2, 0, -capW*0.4, capY+capH*0.2, capW*0.6);
-  capSpec.addColorStop(0,'rgba(255,255,255,0.35)');
-  capSpec.addColorStop(1,'rgba(255,255,255,0)');
-  ctx.fillStyle = capSpec;
-  ctx.beginPath();
-  roundedRect(ctx, -capW, capY, capW*2, capH, 8);
-  ctx.fill();
+  /* DROPPER CAP (attar style) */
+  var capY = -bH*0.4-20-38;
+  ctx.beginPath(); rrect(ctx,-bW*0.22, capY, bW*0.44, 40, 6);
+  var capG = ctx.createLinearGradient(-bW*0.22,capY,bW*0.22,capY+40);
+  capG.addColorStop(0,lighten(c.cap,40)); capG.addColorStop(0.5,c.cap); capG.addColorStop(1,darken(c.cap,20));
+  ctx.fillStyle=capG; ctx.fill();
+  ctx.strokeStyle='rgba(201,169,110,0.6)'; ctx.lineWidth=1; ctx.stroke();
+  /* Gold band */
+  ctx.beginPath(); rrect(ctx,-bW*0.24, capY+34, bW*0.48, 8, 3);
+  ctx.fillStyle='rgba(201,169,110,0.7)'; ctx.fill();
+  /* Knurled top */
+  ctx.beginPath(); ctx.arc(0, capY, bW*0.18, 0, Math.PI*2);
+  ctx.fillStyle=lighten(c.cap,60); ctx.fill();
+  ctx.strokeStyle='rgba(201,169,110,0.5)'; ctx.lineWidth=0.7; ctx.stroke();
 
-  ctx.strokeStyle = 'rgba(201,169,110,0.4)';
-  ctx.lineWidth = 0.7;
-  ctx.beginPath();
-  roundedRect(ctx, -capW, capY, capW*2, capH, 8);
-  ctx.stroke();
+  /* Ajmal engraved label */
+  ctx.fillStyle='rgba(201,169,110,0.7)';
+  ctx.font='300 7px "Cormorant Garamond",serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('A J M A L', 0, bH*0.1+10);
+  ctx.font='italic 300 6px "Cormorant Garamond",serif';
+  ctx.fillText('Dahn Al Oudh', 0, bH*0.1+22);
 
   ctx.restore();
-
-  /* ══════════════════════════════
-     ATOMISER NOZZLE (top)
-  ══════════════════════════════ */
-  ctx.save();
-  ctx.transform(1, 0, skewX/h, 1, 0, 0);
-  var nozW = capW * 0.22;
-  var nozY = capY - 18;
-  ctx.beginPath();
-  ctx.rect(-nozW/2, nozY, nozW, 20);
-  var nozGrad = ctx.createLinearGradient(-nozW/2, 0, nozW/2, 0);
-  nozGrad.addColorStop(0,'rgba(255,255,255,0.3)');
-  nozGrad.addColorStop(0.4, theme.cap);
-  nozGrad.addColorStop(1, darkenHex(theme.cap,30));
-  ctx.fillStyle = nozGrad;
-  ctx.fill();
-  /* nozzle tip */
-  ctx.beginPath();
-  ctx.arc(0, nozY, nozW*0.8, 0, Math.PI*2);
-  ctx.fillStyle = '#C9A96E';
-  ctx.fill();
-  ctx.restore();
-
-  /* ══════════════════════════════
-     MIST SPRAY EFFECT (intermittent)
-  ══════════════════════════════ */
-  var sprayPhase = (t * 0.4) % 1;
-  if(sprayPhase < 0.18){
-    ctx.save();
-    ctx.transform(1, 0, skewX/h, 1, 0, 0);
-    var sprayAlpha = sprayPhase < 0.09 ? sprayPhase/0.09 : (0.18-sprayPhase)/0.09;
-    sprayAlpha *= 0.6;
-    var numDrops = 14;
-    for(var di=0; di<numDrops; di++){
-      var da = -Math.PI*0.55 + (di/(numDrops-1)) * Math.PI * 0.5;
-      var dr = 15 + 35 * (sprayPhase/0.18) + Math.random()*12;
-      var dsx = Math.cos(da)*dr; var dsy = Math.sin(da)*dr;
-      var sprayCapY = capY - 20;
-      var dropGrad = ctx.createRadialGradient(dsx, sprayCapY+dsy, 0, dsx, sprayCapY+dsy, 4);
-      dropGrad.addColorStop(0, 'rgba(220,240,255,' + sprayAlpha + ')');
-      dropGrad.addColorStop(1, 'rgba(220,240,255,0)');
-      ctx.beginPath(); ctx.arc(dsx, sprayCapY+dsy, 2+Math.random()*3, 0, Math.PI*2);
-      ctx.fillStyle = dropGrad; ctx.fill();
-    }
-    ctx.restore();
-  }
-
-  ctx.restore(); /* main save */
 }
 
-/* ─ Path helpers ─ */
-function bottleBodyPath(ctx, cx, cy, w, h, r){
-  var x = cx - w/2, y = cy - h/2;
-  ctx.beginPath();
-  ctx.moveTo(x+r, y);
-  ctx.lineTo(x+w-r, y);
-  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
-  ctx.lineTo(x+w, y+h-r);
-  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
-  ctx.lineTo(x+r, y+h);
-  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
-  ctx.lineTo(x, y+r);
-  ctx.quadraticCurveTo(x, y, x+r, y);
-  ctx.closePath();
+/* ═══════════════════════════════════════
+   BOTTLE: EVOKE GOLD FOR HIM
+   Real shape: Tall slim dark cylinder,
+   silver-dark body, gold/metallic wide cap.
+═══════════════════════════════════════ */
+function drawEvoke(ctx, c, px, depth, t){
+  var bH = 215;
+  var bW = 40 * (0.7 + depth*0.3);
+  var sk = px * 15;
+
+  ctx.save();
+  ctx.transform(1,0,sk/bH,1,0,0);
+
+  /* Cylindrical body */
+  var bg = ctx.createLinearGradient(-bW,-bH/2,bW,bH/2);
+  bg.addColorStop(0, lighten(c.body,40));
+  bg.addColorStop(0.25, lighten(c.body,15));
+  bg.addColorStop(0.5, c.body);
+  bg.addColorStop(0.85, c.mid);
+  bg.addColorStop(1, c.dark);
+
+  ctx.beginPath(); rrect(ctx,-bW,-bH/2,bW*2,bH,22);
+  ctx.fillStyle=bg; ctx.fill();
+
+  /* Subtle vertical grain lines (brushed dark metal feel) */
+  for(var vi=0; vi<8; vi++){
+    var vx = -bW + (vi/7)*bW*2;
+    ctx.beginPath(); ctx.moveTo(vx,-bH/2+10); ctx.lineTo(vx,bH/2-10);
+    ctx.strokeStyle='rgba(255,255,255,' + (0.02 + (vi%2)*0.02) + ')';
+    ctx.lineWidth=0.5; ctx.stroke();
+  }
+
+  /* Liquid */
+  liquidFill(ctx, 0, bH*0.18, bW*0.82, bH*0.68, 16, c.liquid);
+
+  /* Shine */
+  var ls=ctx.createLinearGradient(-bW,-bH/2,-bW*0.15,-bH/2);
+  ls.addColorStop(0,'rgba(255,255,255,0.3)'); ls.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.beginPath(); rrect(ctx,-bW,-bH/2,bW*0.55,bH,22); ctx.fillStyle=ls; ctx.fill();
+
+  /* Highlight rim right */
+  var rd=ctx.createLinearGradient(bW*0.4,-bH/2,bW,-bH/2);
+  rd.addColorStop(0,'rgba(0,0,0,0)'); rd.addColorStop(1,'rgba(0,0,0,0.35)');
+  ctx.beginPath(); rrect(ctx,bW*0.4-bW,-bH/2,bW*1.6,bH,22); ctx.fillStyle=rd; ctx.fill();
+
+  specularHit(ctx, -bW*0.5+px*bW*0.3, -bH*0.32, bW*0.65);
+
+  ctx.beginPath(); rrect(ctx,-bW,-bH/2,bW*2,bH,22);
+  ctx.strokeStyle='rgba(201,169,110,0.4)'; ctx.lineWidth=1; ctx.stroke();
+
+  /* EVOKE — gold accent band in lower third */
+  ctx.beginPath(); ctx.rect(-bW*0.95, bH/2-55, bW*1.9, 2);
+  var bandG = ctx.createLinearGradient(-bW,0,bW,0);
+  bandG.addColorStop(0,'#8B6914'); bandG.addColorStop(0.4,'#E8D5B0'); bandG.addColorStop(0.7,'#C9A96E'); bandG.addColorStop(1,'#8B6914');
+  ctx.fillStyle=bandG; ctx.fill();
+
+  /* Neck */
+  neckDraw(ctx, bW*0.25, 30, -bH/2, c.body, c.mid, 'rgba(201,169,110,0.4)');
+
+  /* CAP — wide gold Evoke cap */
+  var capW=bW*0.48, capH=52, capY=-bH/2-30-capH+2;
+  capDraw(ctx, capW, capH, capY, '#C9A96E', 'rgba(201,169,110,0.6)', true);
+
+  labelDraw(ctx, 0, bH*0.08, bW*0.72, 95, c.body, 'AJMAL', 'Evoke Gold', 'EAU DE PARFUM · 75ml');
+
+  ctx.restore();
+  mistSpray(ctx, 0, -bH/2-30-52-2, t, 'rgba(201,169,110,0.5)');
 }
 
-function roundedRect(ctx, x, y, w, h, r){
+/* ═══════════════════════════════════════
+   SHARED DRAWING HELPERS
+═══════════════════════════════════════ */
+function rrect(ctx,x,y,w,h,r){
   ctx.beginPath();
-  ctx.moveTo(x+r, y);
-  ctx.lineTo(x+w-r, y);
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
   ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-  ctx.lineTo(x+w,y+h-r);
-  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-  ctx.lineTo(x+r,y+h);
-  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-  ctx.lineTo(x,y+r);
-  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
   ctx.closePath();
 }
 
-function lighten(hex, amt){
-  if(hex.indexOf('#')===0) hex=hex.slice(1);
-  var r=parseInt(hex.slice(0,2),16), g=parseInt(hex.slice(2,4),16), b=parseInt(hex.slice(4,6),16);
+function hexPath(cx,cy,r,h){
+  /* returns 8-point path for a squashed hex / octagonal bottle */
+  var pts=[];
+  for(var i=0; i<8; i++){
+    var a=(i/8)*Math.PI*2 - Math.PI/2;
+    pts.push([cx+Math.cos(a)*r, cy+Math.sin(a)*h*0.5]);
+  }
+  return pts;
+}
+
+function neckDraw(ctx,nW,nH,bodyTop,col1,col2,rimCol){
+  ctx.beginPath();
+  ctx.moveTo(-nW*0.75, bodyTop);
+  ctx.bezierCurveTo(-nW*0.8, bodyTop+nH*0.45, -nW, bodyTop+nH*0.75, -nW, bodyTop+nH);
+  ctx.lineTo(nW, bodyTop+nH);
+  ctx.bezierCurveTo(nW, bodyTop+nH*0.75, nW*0.8, bodyTop+nH*0.45, nW*0.75, bodyTop);
+  ctx.closePath();
+  var ng = ctx.createLinearGradient(-nW, bodyTop, nW, bodyTop+nH);
+  ng.addColorStop(0, lighten(col1,30)); ng.addColorStop(1, col2);
+  ctx.fillStyle=ng; ctx.fill();
+  var ns = ctx.createLinearGradient(-nW,0,-nW*0.1,0);
+  ns.addColorStop(0,'rgba(255,255,255,0.28)'); ns.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=ns; ctx.fill();
+  ctx.strokeStyle=rimCol; ctx.lineWidth=0.7; ctx.stroke();
+  /* collar band */
+  ctx.beginPath(); ctx.rect(-nW*0.95, bodyTop+nH-6, nW*1.9, 5);
+  ctx.fillStyle='rgba(201,169,110,0.45)'; ctx.fill();
+}
+
+function capDraw(ctx, cW, cH, cY, capCol, rimCol, flatTop){
+  var cg = ctx.createLinearGradient(-cW,cY,cW,cY+cH);
+  cg.addColorStop(0,lighten(capCol.replace('#',''),40));
+  cg.addColorStop(0.4,capCol);
+  cg.addColorStop(1,darken(capCol.replace('#',''),30));
+  ctx.beginPath(); rrect(ctx,-cW,cY,cW*2,cH,flatTop?6:cW);
+  ctx.fillStyle=cg; ctx.fill();
+  /* shine */
+  var cs=ctx.createLinearGradient(-cW,cY,-cW*0.15,cY+cH);
+  cs.addColorStop(0,'rgba(255,255,255,0.4)'); cs.addColorStop(0.5,'rgba(255,255,255,0.08)'); cs.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=cs; ctx.fill();
+  /* engrave lines */
+  ctx.strokeStyle='rgba(0,0,0,0.1)'; ctx.lineWidth=0.5;
+  for(var li=0;li<3;li++){ var ly=cY+cH*(0.3+li*0.22); ctx.beginPath(); ctx.moveTo(-cW+4,ly); ctx.lineTo(cW-4,ly); ctx.stroke(); }
+  /* gold band at base */
+  ctx.beginPath(); rrect(ctx,-cW*1.05,cY+cH-9,cW*2.1,11,4);
+  var bg2=ctx.createLinearGradient(-cW,0,cW,0);
+  bg2.addColorStop(0,'#8B6914'); bg2.addColorStop(0.3,'#E8D5B0'); bg2.addColorStop(0.7,'#C9A96E'); bg2.addColorStop(1,'#8B6914');
+  ctx.fillStyle=bg2; ctx.fill();
+  ctx.beginPath(); rrect(ctx,-cW,cY,cW*2,cH,flatTop?6:cW);
+  ctx.strokeStyle=rimCol; ctx.lineWidth=0.8; ctx.stroke();
+  /* nozzle */
+  ctx.beginPath(); ctx.rect(-cW*0.14,cY-18,cW*0.28,20);
+  var ng2=ctx.createLinearGradient(-cW*0.14,0,cW*0.14,0);
+  ng2.addColorStop(0,'rgba(255,255,255,0.3)'); ng2.addColorStop(1,capCol);
+  ctx.fillStyle=ng2; ctx.fill();
+  ctx.beginPath(); ctx.arc(0,cY-18,cW*0.16,0,Math.PI*2);
+  ctx.fillStyle='#C9A96E'; ctx.fill();
+}
+
+function labelDraw(ctx, cx, cy, lW, lH, bgColor, brand, product, detail){
+  cy = cy - lH/2;
+  ctx.beginPath(); rrect(ctx, cx-lW/2, cy, lW, lH, 7);
+  ctx.fillStyle='rgba(255,255,255,0.06)'; ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.12)'; ctx.lineWidth=0.5; ctx.stroke();
+  /* decorative lines */
+  ctx.strokeStyle='rgba(201,169,110,0.28)'; ctx.lineWidth=0.4;
+  ctx.beginPath(); ctx.moveTo(cx-lW*0.38,cy+lH*0.26); ctx.lineTo(cx+lW*0.38,cy+lH*0.26); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx-lW*0.38,cy+lH*0.76); ctx.lineTo(cx+lW*0.38,cy+lH*0.76); ctx.stroke();
+  ctx.fillStyle='rgba(245,239,230,0.88)';
+  ctx.font='300 10px "Cormorant Garamond",serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(brand, cx, cy+lH*0.28);
+  ctx.fillStyle='#C9A96E';
+  ctx.font='italic 300 8px "Cormorant Garamond",serif';
+  ctx.fillText(product, cx, cy+lH*0.46);
+  ctx.fillStyle='rgba(245,239,230,0.28)';
+  ctx.font='300 5.5px "DM Sans",sans-serif';
+  ctx.fillText(detail, cx, cy+lH*0.66);
+  ctx.fillStyle='rgba(201,169,110,0.5)';
+  ctx.font='10px serif'; ctx.fillText('✦', cx, cy+lH*0.82);
+}
+
+function liquidFill(ctx, cx, cy, w, h, r, color){
+  var top = cy - h/2;
+  ctx.save();
+  ctx.beginPath(); rrect(ctx, cx-w/2, top, w, h, r); ctx.clip();
+  var lg = ctx.createLinearGradient(0,top,0,top+h);
+  lg.addColorStop(0,color); lg.addColorStop(0.5,color.replace(/[\d.]+\)$/,function(m){ return (parseFloat(m)*1.4).toFixed(2)+')'; })); lg.addColorStop(1,color.replace(/[\d.]+\)$/,function(m){ return (parseFloat(m)*1.7).toFixed(2)+')'; }));
+  ctx.fillStyle=lg; ctx.fillRect(cx-w/2,top,w,h);
+  /* meniscus */
+  ctx.beginPath(); ctx.ellipse(cx, top, w*0.5, 5, 0, 0, Math.PI*2);
+  ctx.fillStyle='rgba(255,255,255,0.06)'; ctx.fill();
+  ctx.restore();
+}
+
+function specularHit(ctx, sx, sy, r){
+  var sg=ctx.createRadialGradient(sx,sy,0,sx,sy,r);
+  sg.addColorStop(0,'rgba(255,255,255,0.5)');
+  sg.addColorStop(0.15,'rgba(255,255,255,0.12)');
+  sg.addColorStop(0.4,'rgba(255,255,255,0.03)');
+  sg.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=sg; ctx.fill();
+}
+
+function mistSpray(ctx, x, topY, t, col){
+  var phase = (t*0.35) % 1;
+  if(phase >= 0.2) return;
+  ctx.save();
+  var alpha = phase < 0.1 ? phase/0.1 : (0.2-phase)/0.1;
+  alpha *= 0.55;
+  for(var di=0; di<12; di++){
+    var da = -Math.PI*0.6 + (di/11)*Math.PI*0.5;
+    var dr = 12 + 32*(phase/0.2) + Math.random()*8;
+    var dsx = x + Math.cos(da)*dr;
+    var dsy = topY + Math.sin(da)*dr;
+    var dg = ctx.createRadialGradient(dsx,dsy,0,dsx,dsy,5);
+    var c0 = col.replace(/[\d.]+\)$/,alpha.toFixed(2)+')');
+    dg.addColorStop(0,c0); dg.addColorStop(1,'rgba(220,240,255,0)');
+    ctx.beginPath(); ctx.arc(dsx,dsy,2+Math.random()*3,0,Math.PI*2);
+    ctx.fillStyle=dg; ctx.fill();
+  }
+  ctx.restore();
+}
+
+function lighten(hex,amt){
+  if(hex[0]==='#') hex=hex.slice(1);
+  var r=parseInt(hex.slice(0,2),16)||0, g=parseInt(hex.slice(2,4),16)||0, b=parseInt(hex.slice(4,6),16)||0;
   return 'rgb('+Math.min(255,r+amt)+','+Math.min(255,g+amt)+','+Math.min(255,b+amt)+')';
 }
-function darkenHex(hex, amt){
-  if(hex.indexOf('#')===0) hex=hex.slice(1);
-  var r=parseInt(hex.slice(0,2),16), g=parseInt(hex.slice(2,4),16), b=parseInt(hex.slice(4,6),16);
+function darken(hex,amt){
+  if(hex[0]==='#') hex=hex.slice(1);
+  var r=parseInt(hex.slice(0,2),16)||0, g=parseInt(hex.slice(2,4),16)||0, b=parseInt(hex.slice(4,6),16)||0;
   return 'rgb('+Math.max(0,r-amt)+','+Math.max(0,g-amt)+','+Math.max(0,b-amt)+')';
 }
 
-/* ─ Colour swatch ─ */
-function setBottleColor(idx, el){
-  bottleColorIdx = idx;
-  document.querySelectorAll('.swatch').forEach(function(s){ s.classList.remove('active-swatch'); });
-  el.classList.add('active-swatch');
-  showToast('Colour changed', bottleColors[idx].label);
+/* ═══════════════════════════════════════
+   AURA MODE
+═══════════════════════════════════════ */
+function startAura(){
+  mode = 'aura';
+  document.getElementById('landing').classList.add('hide');
+  document.getElementById('hud').classList.add('active');
+  document.getElementById('panel').classList.add('show');
+  document.getElementById('place-hint').classList.add('hide');
+
+  var canvas = document.getElementById('main-canvas');
+  canvas.classList.add('active');
+  canvas.width = window.innerWidth*devicePixelRatio;
+  canvas.height = window.innerHeight*devicePixelRatio;
+  canvas.style.width=window.innerWidth+'px'; canvas.style.height=window.innerHeight+'px';
+  canvas.style.pointerEvents='none';
+
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false})
+    .then(function(s){ stream=s; var v=document.getElementById('ar-video'); v.srcObject=s; v.play(); v.classList.add('active'); })
+    .catch(function(){});
+
+  auraActive=true; auraParticles=[];
+  var ctx=canvas.getContext('2d');
+  auraLoop(ctx, canvas);
+  showToast('Scent aura activated', PRODUCTS[curProd].name);
 }
 
-/* ═══════════════════════════════════════════
-   SIMULATION MODE (no camera)
-═══════════════════════════════════════════ */
-function runSimulationMode(mode){
-  showToast('Camera off — running demo mode','Simulation Active');
-  simulateSurfaceDetection();
+function auraLoop(ctx,canvas){
+  var cx=canvas.width/2, cy=canvas.height*0.55;
+  var colors = ['#C9A96E','#B05478','#1D9E75','#5C4A8A','#C9714A','#8B6914'];
+  var labels = ['oud','rose','amber','musk','saffron','bergamot','cedar','jasmine'];
+
+  function spawnParticle(){
+    var angle=Math.random()*Math.PI*2, radius=50+Math.random()*90;
+    auraParticles.push({
+      x: cx+Math.cos(angle)*radius, y: cy+Math.sin(angle)*radius*0.45,
+      tx:(Math.random()-0.5)*220, ty:-(90+Math.random()*200),
+      size:3+Math.random()*10, col:colors[Math.floor(Math.random()*colors.length)],
+      life:0, maxLife:2.5+Math.random()*2.5,
+      isLabel:Math.random()>0.65, label:labels[Math.floor(Math.random()*labels.length)]
+    });
+  }
+
+  var lastSpawn=0;
+  function frame(){
+    if(mode!=='aura'){ ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+    t+=0.016;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    /* Aura rings */
+    var numRings=5;
+    for(var ri=0;ri<numRings;ri++){
+      var phase=((t*0.4)+(ri/numRings))%1;
+      var r=30+phase*canvas.width*0.55;
+      var alpha=(1-phase)*0.5;
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.strokeStyle='rgba(201,169,110,'+alpha+')';
+      ctx.lineWidth=1.5; ctx.stroke();
+    }
+
+    /* Spawn */
+    if(t-lastSpawn>0.12){ spawnParticle(); lastSpawn=t; }
+
+    /* Draw particles */
+    auraParticles = auraParticles.filter(function(p){
+      p.life+=0.016;
+      var progress=p.life/p.maxLife;
+      var alpha=progress<0.1?progress/0.1:progress>0.8?(1-progress)/0.2:0.6;
+      var px2=p.x+p.tx*progress, py2=p.y+p.ty*progress;
+      if(p.isLabel){
+        ctx.fillStyle=p.col.replace(')',','+alpha+')').replace('rgb','rgba').replace('rgba(#','rgba(');
+        ctx.font='9px "DM Sans",sans-serif';
+        ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.globalAlpha=alpha; ctx.fillText(p.label,px2,py2); ctx.globalAlpha=1;
+      } else {
+        var g=ctx.createRadialGradient(px2,py2,0,px2,py2,p.size);
+        g.addColorStop(0,p.col); g.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.globalAlpha=alpha; ctx.beginPath(); ctx.arc(px2,py2,p.size,0,Math.PI*2);
+        ctx.fillStyle=g; ctx.fill(); ctx.globalAlpha=1;
+      }
+      return p.life<p.maxLife;
+    });
+    raf=requestAnimationFrame(frame);
+  }
+  raf=requestAnimationFrame(frame);
 }
 
-/* ═══════════════════════════════════════════
-   PRODUCT SWITCH
-═══════════════════════════════════════════ */
-function switchProduct(i, el){
-  curProduct = i;
-  var p = products[i];
-  document.getElementById('p-name').textContent = p.name;
-  document.getElementById('p-sub').textContent = p.sub;
-  document.getElementById('p-eyebrow').textContent = p.eyebrow;
-  var nr = document.getElementById('p-notes');
-  nr.innerHTML = p.notes.map(function(n){ return '<span class="note-pill">'+n+'</span>'; }).join('');
-  document.querySelectorAll('.mode-tab').forEach(function(t){ t.classList.remove('active'); });
-  el.classList.add('active');
-  if(arMode === 'aura' && auraActive){
-    clearInterval(particleInterval);
-    var overlay = document.getElementById('aura-overlay');
-    overlay.innerHTML = '';
-    launchAura();
+/* ═══════════════════════════════════════
+   WEBXR TRUE AR (immersive-ar)
+═══════════════════════════════════════ */
+async function startWebXR(){
+  if(!navigator.xr){ showToast('WebXR not available on this device',''); return; }
+  try{
+    xrSession = await navigator.xr.requestSession('immersive-ar',{
+      requiredFeatures:['hit-test','dom-overlay'],
+      domOverlay:{root:document.body}
+    });
+    showToast('True AR enabled · Tap floor to place','WebXR Active');
+    document.getElementById('xr-btn').classList.remove('show');
+    xrSession.addEventListener('end',function(){ xrSession=null; });
+    /* XR rendering handled by the existing canvas loop but we add hit-test */
+    xrSession.requestHitTestSource({space: await xrSession.requestReferenceSpace('viewer')})
+      .then(function(src){ xrHitTestSource=src; });
+  } catch(e){
+    showToast('AR access denied — using camera mode','');
   }
 }
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════
    NAVIGATION
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 function backToLanding(){
-  auraActive = false; bottleActive = false;
-  clearInterval(particleInterval);
+  mode=null; auraActive=false; bottlePlaced=false;
   cancelAnimationFrame(raf);
-  if(arStream){ arStream.getTracks().forEach(function(t){t.stop()}); arStream=null; }
-  document.getElementById('ar-view').classList.remove('active');
+  clearInterval(particleInterval);
+  if(stream){ stream.getTracks().forEach(function(t){ t.stop(); }); stream=null; }
+  if(xrSession){ xrSession.end(); xrSession=null; }
+  document.getElementById('ar-video').classList.remove('active');
+  document.getElementById('main-canvas').classList.remove('active');
+  document.getElementById('main-canvas').style.pointerEvents='none';
+  document.getElementById('main-canvas').getContext('2d').clearRect(0,0,9999,9999);
   document.getElementById('hud').classList.remove('active');
-  document.getElementById('aura-overlay').classList.remove('active');
-  document.getElementById('aura-overlay').innerHTML = '';
-  document.getElementById('bottle-canvas').classList.remove('active');
-  document.getElementById('bottle-canvas').style.pointerEvents = 'none';
-  document.getElementById('color-swatches').classList.remove('active');
-  document.getElementById('bottle-controls').classList.remove('active');
-  var ctx = document.getElementById('bottle-canvas').getContext('2d');
-  ctx.clearRect(0,0,9999,9999);
+  document.getElementById('panel').classList.remove('show');
+  document.getElementById('place-hint').classList.remove('hide');
+  document.getElementById('place-hint').style.display='';
+  document.getElementById('xr-btn').classList.remove('show');
   document.getElementById('landing').classList.remove('hide');
-  document.getElementById('hud-bottom').classList.remove('show');
 }
 
-function showIngredients(){ document.getElementById('landing').classList.add('hide'); document.getElementById('ingredient-view').classList.add('active'); }
-function hideIngredients(){ document.getElementById('ingredient-view').classList.remove('active'); document.getElementById('landing').classList.remove('hide'); }
-function showStory(){ document.getElementById('landing').classList.add('hide'); document.getElementById('story-view').classList.add('active'); }
-function hideStory(){ document.getElementById('story-view').classList.remove('active'); document.getElementById('landing').classList.remove('hide'); }
-function highlightIngredient(id){ var n={assam:'Assam Oud',taif:'Taif Rose',france:'Grasse Musk',cambodia:'Cambodian Oud',zanzibar:'Zanzibar Clove'}; showToast('Tap a card below to learn more', n[id]||id); }
+function showIngredients(){ document.getElementById('landing').classList.add('hide'); document.getElementById('ingredient-view').style.display='block'; }
+function hideIngredients(){ document.getElementById('ingredient-view').style.display='none'; document.getElementById('landing').classList.remove('hide'); }
+function showStory(){ document.getElementById('landing').classList.add('hide'); document.getElementById('story-view').style.display='block'; }
+function hideStory(){ document.getElementById('story-view').style.display='none'; document.getElementById('landing').classList.remove('hide'); }
 
-/* ═══════════════════════════════════════════
-   TOAST
-═══════════════════════════════════════════ */
 var toastT;
-function showToast(msg, title){
+function showToast(msg,title){
   clearTimeout(toastT);
-  document.getElementById('t-title').textContent = title||'';
-  document.getElementById('t-msg').textContent = msg||'';
-  var el = document.getElementById('toast');
+  document.getElementById('t-title').textContent=title||'';
+  document.getElementById('t-msg').textContent=msg||'';
+  var el=document.getElementById('toast');
   el.classList.add('show');
-  toastT = setTimeout(function(){ el.classList.remove('show'); }, 3000);
+  toastT=setTimeout(function(){ el.classList.remove('show'); },3200);
 }
+var particleInterval; /* placeholder to avoid ref error */
 </script>
 </body>
 </html>
